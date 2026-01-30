@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">FoodPlanner</string>
+    <string name="mealmate">🍲 MealMate</string>
+    <string name="your_daily_meal_planner">Your daily meal planner 🍴</string>
 </resources>
