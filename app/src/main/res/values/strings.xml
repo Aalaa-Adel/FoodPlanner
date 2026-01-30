@@ -1,5 +1,51 @@
 <resources>
-    <string name="app_name">FoodPlanner</string>
-    <string name="mealmate">🍲 MealMate</string>
-    <string name="your_daily_meal_planner">Your daily meal planner 🍴</string>
+
+    <!-- App Name -->
+    <string name="app_name">MealMate</string>
+    <string name="mealmate">MealMate</string>
+    <string name="your_daily_meal_planner">Your Daily Meal Planner</string>
+
+    <!-- General -->
+    <string name="skip">Skip</string>
+    <string name="get_started">Get Started</string>
+
+    <!-- Slide 1 -->
+    <string name="slide1_headline">Plan Your Meals Easily</string>
+
+    <string name="slide1_counter">1000+ Recipes</string>
+
+    <string name="slide1_subtitle"> Discover delicious meals from different countries and categories.
+        Save your favorites and start building your weekly meal plan.
+    </string>
+
+    <!-- Slide 2 -->
+    <string name="slide2_headline">Explore and Search</string>
+
+    <string name="ai_powered">Meal of the Day</string>
+
+    <string name="slide2_subtitle"> Search meals by ingredient, country, or category.
+        Get inspired by Meal of the Day and find your next favorite recipe.
+    </string>
+
+    <!-- Slide 3 -->
+    <string name="slide3_headline">Plan • Save • Sync</string>
+
+    <string name="always_accessible">Available Offline</string>
+
+    <string name="slide3_subtitle"> Add meals to your weekly plan, access favorites without internet,
+        and sync your data securely across devices.
+    </string>
+
+    <!-- Content Descriptions -->
+    <string name="food_image">Food Image</string>
+    <string name="version">Version 1.0</string>
+    <string name="app_tagline">Your Daily Meal Planner</string>
+    <string name="next">Next</string>
+    <string name="title_activity_auth">AuthActivity</string>
+    <string name="title_onboarding1">Discover Delicious Meals</string>
+    <string name="title_onboarding2">Plan Your Week Easily</string>
+    <string name="title_onboarding3"><![CDATA[Save & Cook Offline]]></string>
+    <string name="subtitle_onboarding1">Browse thousands of gourmet recipes with Plato.</string>
+    <string name="subtitle_onboarding2">Organize your breakfast, lunch, and dinner in seconds.</string>
+    <string name="subtitle_onboarding3">Access your meal plan anywhere with Plato Offline.</string>
 </resources>

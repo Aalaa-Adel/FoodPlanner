@@ -1,4 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base Theme -->
     <style name="Theme.FoodPlanner" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary / Accent -->
         <item name="colorPrimary">@color/primary_light</item>
@@ -15,4 +17,12 @@
         <item name="android:textColorPrimary">@color/text_primary_light</item>
         <item name="android:textColorSecondary">@color/text_secondary_light</item>
     </style>
+
+    <!-- Splash Theme -->
+    <style name="Theme.FoodPlanner.Splash" parent="Theme.FoodPlanner">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:statusBarColor">@color/splash_start</item>
+        <item name="android:navigationBarColor">@color/splash_end</item>
+    </style>
+
 </resources>

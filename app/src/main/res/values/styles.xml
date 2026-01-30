@@ -1,0 +1,42 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Text Styles -->
+    <style name="Text" />
+
+    <style name="Text.OnboardingTitle">
+        <item name="android:textColor">@color/text_primary_dark</item>
+        <item name="android:textSize">@dimen/text_xlarge</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/nunito</item>
+        <item name="android:maxWidth">300dp</item>
+    </style>
+
+    <style name="Text.OnboardingSubtitle">
+        <item name="android:textColor">@color/text_secondary_dark</item>
+        <item name="android:textSize">@dimen/text_large</item>
+        <item name="android:lineSpacingExtra">4dp</item>
+        <item name="android:fontFamily">@font/nunito</item>
+        <item name="android:maxWidth">320dp</item>
+    </style>
+
+    <style name="Text.Skip">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/text_medium</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/nunito</item>
+        <item name="android:padding">@dimen/padding_large</item>
+    </style>
+
+    <!-- Button -->
+    <style name="Widget.FoodPlanner.Button" parent="Widget.AppCompat.Button">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:background">@drawable/btn_primary</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/text_large</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/nunito</item>
+        <item name="android:layout_height">@dimen/button_height</item>
+    </style>
+
+</resources>

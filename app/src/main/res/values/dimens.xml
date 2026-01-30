@@ -1,0 +1,22 @@
+<resources>
+    <!-- General Spacing -->
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_medium">16dp</dimen>
+    <dimen name="padding_large">28dp</dimen>
+    <dimen name="padding_xlarge">40dp</dimen>
+
+    <!-- Text Sizes -->
+    <dimen name="text_small">14sp</dimen>
+    <dimen name="text_medium">18sp</dimen>
+    <dimen name="text_large">22sp</dimen>
+    <dimen name="text_xlarge">34sp</dimen>
+
+    <!-- Button Sizes -->
+    <dimen name="button_height">72dp</dimen>
+    <dimen name="button_radius">12dp</dimen>
+
+    <!-- Progress Bar -->
+    <dimen name="progress_width">25dp</dimen>
+    <dimen name="progress_height">6dp</dimen>
+    <dimen name="progress_margin">4dp</dimen>
+</resources>
