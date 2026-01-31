@@ -10,31 +10,37 @@
     <string name="get_started">Get Started</string>
 
     <!-- Slide 1 -->
-    <string name="slide1_headline">Plan Your Meals Easily</string>
+    <string name="slide1_headline">Smart Meal Planning</string>
 
-    <string name="slide1_counter">1000+ Recipes</string>
+    <string name="slide1_counter">1000+ Healthy Recipes</string>
 
-    <string name="slide1_subtitle"> Discover delicious meals from different countries and categories.
-        Save your favorites and start building your weekly meal plan.
+    <string name="slide1_subtitle">
+    Create your weekly meal plan with ease.
+    Browse meals from different cuisines and save your favorites in one place.
     </string>
 
+
     <!-- Slide 2 -->
-    <string name="slide2_headline">Explore and Search</string>
+    <string name="slide2_headline">Search &amp; Discover</string>
 
     <string name="ai_powered">Meal of the Day</string>
 
-    <string name="slide2_subtitle"> Search meals by ingredient, country, or category.
-        Get inspired by Meal of the Day and find your next favorite recipe.
+    <string name="slide2_subtitle">
+    Find meals by ingredients, category, or country.
+    Discover Meal of the Day and explore new recipes every time.
     </string>
+
 
     <!-- Slide 3 -->
-    <string name="slide3_headline">Plan • Save • Sync</string>
+    <string name="slide3_headline">Plan • Save • Access</string>
 
-    <string name="always_accessible">Available Offline</string>
+    <string name="always_accessible">Works Offline</string>
 
-    <string name="slide3_subtitle"> Add meals to your weekly plan, access favorites without internet,
-        and sync your data securely across devices.
+    <string name="slide3_subtitle">
+    Save your favorite meals, access them offline,
+    and keep your data synced securely across devices.
     </string>
+
 
     <!-- Content Descriptions -->
     <string name="food_image">Food Image</string>
@@ -48,4 +54,21 @@
     <string name="subtitle_onboarding1">Browse thousands of gourmet recipes with Plato.</string>
     <string name="subtitle_onboarding2">Organize your breakfast, lunch, and dinner in seconds.</string>
     <string name="subtitle_onboarding3">Access your meal plan anywhere with Plato Offline.</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="welcom_back">Welcom Back</string>
+    <string name="login_tagline">Ready for your next gourmet meal?</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="or">or</string>
+    <string name="dont_t_have_an_account">Dont\'t have an account?</string>
+    <string name="sign_up">Sign up</string>
+    <string name="continue_as_guest">Continue as guest</string>
+    <string name="sign_up_title">Create Account</string>
+    <string name="sign_up_tagline">Join FoodPlanner and start planning your meals!</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="already_have_account">Already have an account? </string>
+
+
+
 </resources>
