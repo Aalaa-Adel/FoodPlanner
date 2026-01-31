@@ -26,22 +26,25 @@ public class OnboardingActivity extends AppCompatActivity {
             R.drawable.onboarding3
     };
 
-    private final String[] titles = {
-            getString(R.string.title_onboarding1),
-            getString(R.string.title_onboarding2),
-            getString(R.string.title_onboarding3)
-    };
-
-    private final String[] subtitles = {
-            getString(R.string.subtitle_onboarding1),
-            getString(R.string.subtitle_onboarding2),
-            getString(R.string.subtitle_onboarding3)
-    };
+    private String[] titles;
+    private String[] subtitles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_onboarding);
+
+        titles = new String[]{
+                getString(R.string.title_onboarding1),
+                getString(R.string.title_onboarding2),
+                getString(R.string.title_onboarding3)
+        };
+
+        subtitles = new String[]{
+                getString(R.string.subtitle_onboarding1),
+                getString(R.string.subtitle_onboarding2),
+                getString(R.string.subtitle_onboarding3)
+        };
 
         img = findViewById(R.id.onboarding_image);
         title = findViewById(R.id.onboarding_title);
