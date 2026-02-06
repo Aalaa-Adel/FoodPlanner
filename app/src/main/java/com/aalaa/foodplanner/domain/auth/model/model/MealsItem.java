@@ -1,4 +1,4 @@
-package com.aalaa.foodplanner.data.model;
+package com.aalaa.foodplanner.domain.auth.model.model;
 
 import android.util.Pair;
 
@@ -74,7 +74,6 @@ public class MealsItem {
         this.strMealThumb = meal.strMealThumb;
         this.strYoutube = meal.strYoutube;
 
-        // Copy ingredients
         this.strIngredient1 = meal.strIngredient1;
         this.strIngredient2 = meal.strIngredient2;
         this.strIngredient3 = meal.strIngredient3;

@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.aalaa.foodplanner.data.model.MealsItem;
+import com.aalaa.foodplanner.domain.auth.model.model.MealsItem;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;

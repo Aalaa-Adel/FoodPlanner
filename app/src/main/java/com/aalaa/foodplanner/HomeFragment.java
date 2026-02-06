@@ -2,7 +2,6 @@ package com.aalaa.foodplanner;
 
 import static android.view.View.VISIBLE;
 
-import android.net.Network;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,9 +15,9 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.aalaa.foodplanner.data.model.Area;
-import com.aalaa.foodplanner.data.model.Category;
-import com.aalaa.foodplanner.data.model.MealsItem;
+import com.aalaa.foodplanner.domain.auth.model.model.Area;
+import com.aalaa.foodplanner.domain.auth.model.model.Category;
+import com.aalaa.foodplanner.domain.auth.model.model.MealsItem;
 import com.aalaa.foodplanner.datasource.remote.AreaNetworkResponse;
 import com.aalaa.foodplanner.datasource.remote.AreaRemoteDataSource;
 import com.aalaa.foodplanner.datasource.remote.CategoryNetworkResponse;
