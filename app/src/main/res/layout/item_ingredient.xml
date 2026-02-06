@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- item_ingredient.xml - Single Ingredient Item -->
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="14dp"
+    app:cardElevation="0dp"
+    app:cardBackgroundColor="@color/card_light">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="16dp">
+
+        <!-- Ingredient Image Placeholder -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/bg_light"
+            android:layout_marginEnd="16dp">
+
+            <ImageView
+                android:id="@+id/iv_ingredient_image"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_ingredient_placeholder"
+                android:contentDescription="@string/ingredient"/>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Ingredient Details -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_ingredient_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fresh Ingredient 1"
+                android:textColor="@color/text_primary_light"
+                android:textSize="15sp"
+                android:fontFamily="@font/nunito_bold"
+                android:layout_marginBottom="2dp"/>
+
+            <TextView
+                android:id="@+id/tv_ingredient_note"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Optional description"
+                android:textColor="@color/text_secondary_light"
+                android:textSize="12sp"
+                android:fontFamily="@font/nunito_regular"
+                android:visibility="gone"/>
+        </LinearLayout>
+
+        <!-- Quantity -->
+        <TextView
+            android:id="@+id/tv_ingredient_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100g"
+            android:textColor="@color/text_secondary_light"
+            android:textSize="13sp"
+            android:fontFamily="@font/nunito_bold"
+            android:layout_marginStart="12dp"/>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
