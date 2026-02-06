@@ -1,10 +1,8 @@
 package com.aalaa.foodplanner.datasource.remote;
 
-import com.aalaa.foodplanner.data.model.Category;
-import com.aalaa.foodplanner.data.model.CategoryResponse;
-import com.aalaa.foodplanner.data.model.MealResponse;
-import com.aalaa.foodplanner.data.model.MealsItem;
-import com.aalaa.foodplanner.network.Network;
+import com.aalaa.foodplanner.domain.auth.model.model.MealResponse;
+import com.aalaa.foodplanner.domain.auth.model.model.MealsItem;
+import com.aalaa.foodplanner.data.network.Network;
 
 import java.io.IOException;
 import java.util.List;

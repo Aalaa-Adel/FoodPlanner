@@ -1,7 +1,6 @@
 package com.aalaa.foodplanner.datasource.remote;
 
-import com.aalaa.foodplanner.data.model.Area;
-import com.aalaa.foodplanner.data.model.Category;
+import com.aalaa.foodplanner.domain.auth.model.model.Area;
 
 import java.util.List;
 

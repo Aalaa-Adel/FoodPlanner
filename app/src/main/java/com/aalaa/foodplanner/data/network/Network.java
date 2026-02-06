@@ -1,4 +1,4 @@
-package com.aalaa.foodplanner.network;
+package com.aalaa.foodplanner.data.network;
 
 import com.aalaa.foodplanner.datasource.remote.MealServices;
 

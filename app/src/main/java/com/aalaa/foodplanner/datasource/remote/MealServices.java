@@ -1,10 +1,9 @@
 package com.aalaa.foodplanner.datasource.remote;
 
-import com.aalaa.foodplanner.data.model.AreaResponse;
-import com.aalaa.foodplanner.data.model.CategoryResponse;
-import com.aalaa.foodplanner.data.model.FilterMealResponse;
-import com.aalaa.foodplanner.data.model.IngredientsResponse;
-import com.aalaa.foodplanner.data.model.MealResponse;
+import com.aalaa.foodplanner.domain.auth.model.model.AreaResponse;
+import com.aalaa.foodplanner.domain.auth.model.model.CategoryResponse;
+import com.aalaa.foodplanner.domain.auth.model.model.IngredientsResponse;
+import com.aalaa.foodplanner.domain.auth.model.model.MealResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
