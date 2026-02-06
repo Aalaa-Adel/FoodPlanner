@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.aalaa.foodplanner.data.model.Category;
+import com.aalaa.foodplanner.domain.auth.model.model.Category;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;

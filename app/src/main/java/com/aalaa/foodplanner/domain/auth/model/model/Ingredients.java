@@ -1,4 +1,4 @@
-package com.aalaa.foodplanner.data.model;
+package com.aalaa.foodplanner.domain.auth.model.model;
 public class Ingredients {
     private String idIngredient;
     private String strIngredient;
