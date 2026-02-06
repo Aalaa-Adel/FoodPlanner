@@ -1,24 +1,19 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Base Theme -->
     <style name="Theme.FoodPlanner" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Primary / Accent -->
         <item name="colorPrimary">@color/primary_light</item>
         <item name="colorPrimaryContainer">@color/card_light</item>
         <item name="colorAccent">@color/accent_light</item>
         <item name="colorSecondary">@color/accent_light</item>
 
-        <!-- Background / Surface -->
         <item name="android:windowBackground">@color/background_light</item>
         <item name="colorSurface">@color/card_light</item>
         <item name="colorOnSurface">@color/text_primary_light</item>
 
-        <!-- Text Colors -->
         <item name="android:textColorPrimary">@color/text_primary_light</item>
         <item name="android:textColorSecondary">@color/text_secondary_light</item>
     </style>
 
-    <!-- Splash Theme -->
     <style name="Theme.FoodPlanner.Splash" parent="Theme.FoodPlanner">
         <item name="android:windowFullscreen">true</item>
         <item name="android:statusBarColor">@color/splash_start</item>

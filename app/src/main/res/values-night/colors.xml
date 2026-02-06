@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Dark Mode Colors -->
     <color name="background_dark">#121212</color>
     <color name="card_dark">#1A1A1A</color>
     <color name="text_primary_dark">#FFFFFF</color>
     <color name="text_secondary_dark">#B3B3B3</color>
 
-    <!-- Bottom Navigation (Dark) -->
     <color name="bottom_nav_bg">#1A1A1A</color>
     <color name="bottom_nav_item_unselected">#B3B3B3</color>
 
-    <!-- Semantic Colors (Dark) -->
     <color name="page_background">@color/background_dark</color>
     <color name="card_background_color">@color/card_dark</color>
     <color name="text_primary">@color/text_primary_dark</color>
@@ -18,7 +15,6 @@
     <color name="text_tertiary">@color/background_dark</color>
     <color name="accent_color">@color/accent_dark</color>
 
-    <!-- Auth Semantic Colors (Dark) -->
     <color name="auth_card_bg">#CC000000</color>
     <color name="auth_input_bg">#4D666666</color>
     <color name="auth_text">@color/text_primary_dark</color>
