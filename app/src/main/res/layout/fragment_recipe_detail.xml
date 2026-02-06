@@ -142,9 +142,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="PASTA"
+                            style="@style/TextAppearance.FoodPlanner.Label"
                             android:textColor="@color/accent_light"
-                            android:textSize="12sp"
-                            android:fontFamily="@font/nunito_bold"
                             android:letterSpacing="0.08"/>
 
                         <TextView
@@ -160,9 +159,8 @@
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
                             android:text="Italy"
-                            android:textColor="@color/text_secondary_light"
-                            android:textSize="12sp"
-                            android:fontFamily="@font/nunito_bold"/>
+                            style="@style/TextAppearance.FoodPlanner.Label"
+                            android:textColor="@color/text_secondary_light"/>
 
                         <ImageView
                             android:layout_width="16dp"
@@ -175,9 +173,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="4.9"
-                            android:textColor="@color/text_primary_light"
-                            android:textSize="14sp"
-                            android:fontFamily="@font/nunito_bold"/>
+                            style="@style/TextAppearance.FoodPlanner.Body"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_primary_light"/>
                     </LinearLayout>
 
                     <!-- Recipe Name -->
@@ -186,9 +184,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Truffle Mushroom Pasta"
+                        style="@style/TextAppearance.FoodPlanner.Headline"
                         android:textColor="@color/text_primary_light"
-                        android:textSize="24sp"
-                        android:fontFamily="@font/nunito_black"
                         android:layout_marginBottom="20dp"/>
 
                     <!-- Stats Row -->
@@ -219,9 +216,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="TIME"
-                                    android:textColor="@color/text_secondary_light"
+                                    style="@style/TextAppearance.FoodPlanner.Label"
                                     android:textSize="10sp"
-                                    android:fontFamily="@font/nunito_bold"
                                     android:letterSpacing="0.1"
                                     android:layout_marginBottom="4dp"/>
 
@@ -230,9 +226,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="25 Min"
-                                    android:textColor="@color/text_primary_light"
-                                    android:textSize="15sp"
-                                    android:fontFamily="@font/nunito_black"/>
+                                    style="@style/TextAppearance.FoodPlanner.Body"
+                                    android:fontFamily="@font/nunito_black"
+                                    android:textColor="@color/text_primary_light"/>
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
 
@@ -258,9 +254,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="SERVINGS"
-                                    android:textColor="@color/text_secondary_light"
+                                    style="@style/TextAppearance.FoodPlanner.Label"
                                     android:textSize="10sp"
-                                    android:fontFamily="@font/nunito_bold"
                                     android:letterSpacing="0.1"
                                     android:layout_marginBottom="4dp"/>
 
@@ -269,9 +264,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="2 Ppl"
-                                    android:textColor="@color/text_primary_light"
-                                    android:textSize="15sp"
-                                    android:fontFamily="@font/nunito_black"/>
+                                    style="@style/TextAppearance.FoodPlanner.Body"
+                                    android:fontFamily="@font/nunito_black"
+                                    android:textColor="@color/text_primary_light"/>
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
 
@@ -296,9 +291,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="KCAL"
-                                    android:textColor="@color/text_secondary_light"
+                                    style="@style/TextAppearance.FoodPlanner.Label"
                                     android:textSize="10sp"
-                                    android:fontFamily="@font/nunito_bold"
                                     android:letterSpacing="0.1"
                                     android:layout_marginBottom="4dp"/>
 
@@ -307,9 +301,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="450"
-                                    android:textColor="@color/text_primary_light"
-                                    android:textSize="15sp"
-                                    android:fontFamily="@font/nunito_black"/>
+                                    style="@style/TextAppearance.FoodPlanner.Body"
+                                    android:fontFamily="@font/nunito_black"
+                                    android:textColor="@color/text_primary_light"/>
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
                     </LinearLayout>
@@ -375,8 +369,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/add_to_meal_plan"
                 android:textColor="@android:color/white"
-                android:textSize="15sp"
-                android:fontFamily="@font/nunito_bold"/>
+                style="@style/TextAppearance.FoodPlanner.Body"
+                android:textStyle="bold"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
