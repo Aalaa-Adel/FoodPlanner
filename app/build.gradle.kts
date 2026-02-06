@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.google.services)
 }
 
 android {
@@ -59,4 +60,34 @@ dependencies {
     androidTestImplementation(libs.ui.test.junit4)
     debugImplementation(libs.ui.tooling)
     debugImplementation(libs.ui.test.manifest)
+    implementation(libs.glide)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore)
+    implementation(libs.credentials)
+    implementation(libs.credentials.play.services)
+    implementation(libs.googleid)
+    implementation(libs.converter.gson)
+    implementation(libs.room.runtime)
+    annotationProcessor(libs.room.compiler)
+    implementation(libs.roomrx)
+    implementation ("io.reactivex.rxjava3:rxjava:3.1.8")
+    implementation ("io.reactivex.rxjava3:rxandroid:3.0.2")
+
+    // Firebase
+    implementation ("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-firestore")
+
+    // Google Credential Manager
+    implementation ("androidx.credentials:credentials:1.2.2")
+    implementation ("androidx.credentials:credentials-play-services-auth:1.2.2")
+    implementation ("com.google.android.libraries.identity.googleid:googleid:1.1.0")
+
+    // Material Design
+    implementation ("com.google.android.material:material:1.11.0")
+
+    // Navigation
+    implementation ("androidx.navigation:navigation-fragment:2.7.6")
+    implementation ("androidx.navigation:navigation-ui:2.7.6")
+
 }
