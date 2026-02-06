@@ -1,48 +1,28 @@
 <resources>
 
-    <!-- App Name -->
     <string name="app_name">MealMate</string>
     <string name="mealmate">MealMate</string>
     <string name="your_daily_meal_planner">Your Daily Meal Planner</string>
-
-    <!-- General -->
     <string name="skip">Skip</string>
     <string name="get_started">Get Started</string>
-
-    <!-- Slide 1 -->
     <string name="slide1_headline">Smart Meal Planning</string>
-
     <string name="slide1_counter">1000+ Healthy Recipes</string>
-
     <string name="slide1_subtitle">
     Create your weekly meal plan with ease.
     Browse meals from different cuisines and save your favorites in one place.
     </string>
-
-
-    <!-- Slide 2 -->
     <string name="slide2_headline">Search &amp; Discover</string>
-
     <string name="ai_powered">Meal of the Day</string>
-
     <string name="slide2_subtitle">
     Find meals by ingredients, category, or country.
     Discover Meal of the Day and explore new recipes every time.
     </string>
-
-
-    <!-- Slide 3 -->
     <string name="slide3_headline">Plan • Save • Access</string>
-
     <string name="always_accessible">Works Offline</string>
-
     <string name="slide3_subtitle">
     Save your favorite meals, access them offline,
     and keep your data synced securely across devices.
     </string>
-
-
-    <!-- Content Descriptions -->
     <string name="food_image">Food Image</string>
     <string name="version">Version 1.0</string>
     <string name="app_tagline">Your Daily Meal Planner</string>
@@ -68,7 +48,41 @@
     <string name="sign_up_tagline">Join FoodPlanner and start planning your meals!</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="already_have_account">Already have an account? </string>
+    <string name="welcome_to_plato">WELCOME TO PLATO</string>
+    <string name="hi_chef_sarah">Hi, Chef Sarah!</string>
+    <string name="search_recipes_ingredients">Search recipes, ingredients...</string>
+    <string name="meal_of_the_day">Meal of the Day</string>
+    <string name="truffle_mushroom_pasta">Truffle Mushroom Pasta</string>
+    <string name="trending">TRENDING</string>
+    <string name="for_you">For You</string>
+    <string name="see_all">See all</string>
+    <string name="categories">Categories</string>
+    <string name="countries">Countries</string>
+    <string name="vegan">Vegan</string>
+    <string name="dessert">Dessert</string>
+    <string name="seafood">Seafood</string>
+    <string name="italian">Italian</string>
+    <string name="italy">Italy</string>
+    <string name="japan">Japan</string>
+    <string name="mexico">Mexico</string>
+    <string name="india">India</string>
 
+    <string name="meal_image">Meal Image</string>
+    <string name="bookmark">Bookmark</string>
+    <string name="profile_avatar">Profile Avatar</string>
+    <string name="back">Back</string>
+    <string name="favorite">Favorite</string>
+    <string name="rating">Rating</string>
+    <string name="add_to_meal_plan">Add to Meal Plan</string>
+    <string name="add">Add</string>
+    <string name="ingredient">Ingredient</string>
+    <string name="video_thumbnail">Video Thumbnail</string>
+    <string name="play_video">Play Video</string>
+    <string name="video_cooking_tutorial">Watch the complete step-by-step cooking tutorial for this delicious recipe.</string>
+    <string name="ingredients_tab">Ingredients</string>
+    <string name="steps_tab">Steps</string>
+    <string name="video_tab">Video</string>
+    <string name="default_web_client_id">304734293886-otm5fkce9atjhuli5t6rlndddsq2pu0a.apps.googleusercontent.com</string>
 
 
 </resources>
