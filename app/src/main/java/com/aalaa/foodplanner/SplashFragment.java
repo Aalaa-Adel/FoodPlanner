@@ -19,7 +19,7 @@ public class SplashFragment extends Fragment {
 
         new Handler().postDelayed(() ->
                         NavHostFragment.findNavController(this)
-                                .navigate(R.id.action_splash_to_onboarding)
+                                .navigate(R.id.action_splash_to_auth)
                 ,5000);
 
         return view;
