@@ -6,7 +6,7 @@ import android.util.Patterns;
 import com.aalaa.foodplanner.data.repository.AuthRepository;
 import com.aalaa.foodplanner.data.repository.AuthRepositoryImpl;
 import com.aalaa.foodplanner.presentation.authentication.AuthContract;
-import com.aalaa.foodplanner.presentation.base.BasePresenter;
+import com.aalaa.foodplanner.presentation.authentication.base.BasePresenter;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.schedulers.Schedulers;

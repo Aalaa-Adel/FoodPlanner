@@ -1,4 +1,4 @@
-package com.aalaa.foodplanner;
+package com.aalaa.foodplanner.presentation.authentication.view;
 
 import android.os.Bundle;
 import android.os.CancellationSignal;
@@ -32,7 +32,6 @@ import com.aalaa.foodplanner.presentation.authentication.AuthContract;
 import com.aalaa.foodplanner.presentation.authentication.presenter.LoginPresenter;
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption;
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential;
-import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
@@ -58,8 +57,8 @@ public class LoginFragment extends Fragment implements AuthContract.LoginView {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
-                             @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+            @Nullable ViewGroup container,
+            @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
         credentialManager = CredentialManager.create(requireContext());
@@ -88,7 +87,7 @@ public class LoginFragment extends Fragment implements AuthContract.LoginView {
         btnTwitter = view.findViewById(R.id.btn_twitter);
         btnSignup = view.findViewById(R.id.btn_signup);
         btnGuest = view.findViewById(R.id.btn_guest);
-        //progressBar = view.findViewById(R.id.progress_bar);
+        // progressBar = view.findViewById(R.id.progress_bar);
     }
 
     private void setupClickListeners(View view) {
@@ -104,7 +103,7 @@ public class LoginFragment extends Fragment implements AuthContract.LoginView {
                 .navigate(R.id.action_login_to_signup));
 
         btnGuest.setOnClickListener(v -> Navigation.findNavController(view)
-                .navigate(R.id.action_login_to_home));
+                .navigate(R.id.action_login_to_main));
 
         btnGoogle.setOnClickListener(v -> signInWithGoogle());
 
@@ -174,7 +173,8 @@ public class LoginFragment extends Fragment implements AuthContract.LoginView {
 
             if (GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL.equals(customCredential.getType())) {
                 try {
-                    GoogleIdTokenCredential googleIdTokenCredential = GoogleIdTokenCredential.createFrom(customCredential.getData());
+                    GoogleIdTokenCredential googleIdTokenCredential = GoogleIdTokenCredential
+                            .createFrom(customCredential.getData());
                     String idToken = googleIdTokenCredential.getIdToken();
 
                     Log.d(TAG, "Google Sign-In successful");
@@ -203,14 +203,13 @@ public class LoginFragment extends Fragment implements AuthContract.LoginView {
                     if (task.isSuccessful()) {
                         Log.d(TAG, "signInWithCredential:success");
                         showSuccess("Google Sign-In successful");
-                        Navigation.findNavController(requireView()).navigate(R.id.action_login_to_home);
+                        Navigation.findNavController(requireView()).navigate(R.id.action_login_to_main);
                     } else {
                         Log.w(TAG, "signInWithCredential:failure", task.getException());
                         showError("Firebase authentication failed: " + task.getException().getMessage());
                     }
                 });
     }
-
 
     private void handleGoogleSignInError(GetCredentialException e) {
         hideLoading();
@@ -230,30 +229,29 @@ public class LoginFragment extends Fragment implements AuthContract.LoginView {
 
     @Override
     public void showEmailError(String error) {
-      //  emailInputLayout.setError(error);
+        // TODO: Implement error showing properly
     }
 
     @Override
     public void showPasswordError(String error) {
-      //  passwordInputLayout.setError(error);
+        // TODO: Implement error showing properly
     }
 
     @Override
     public void clearErrors() {
-       // emailInputLayout.setError(null);
-       // passwordInputLayout.setError(null);
+        // TODO: Implement clear errors
     }
 
     @Override
     public void onLoginSuccess() {
         Toast.makeText(requireContext(), "Login Success", Toast.LENGTH_SHORT).show();
         Navigation.findNavController(requireView())
-                .navigate(R.id.action_login_to_home);
+                .navigate(R.id.action_login_to_main);
     }
 
     @Override
     public void showLoading() {
-       // progressBar.setVisibility(View.VISIBLE);
+        // progressBar.setVisibility(View.VISIBLE);
         btnLogin.setEnabled(false);
         btnGoogle.setEnabled(false);
         btnFacebook.setEnabled(false);
@@ -262,7 +260,7 @@ public class LoginFragment extends Fragment implements AuthContract.LoginView {
 
     @Override
     public void hideLoading() {
-      //  progressBar.setVisibility(View.GONE);
+        // progressBar.setVisibility(View.GONE);
         btnLogin.setEnabled(true);
         btnGoogle.setEnabled(true);
         btnFacebook.setEnabled(true);

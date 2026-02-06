@@ -1,6 +1,6 @@
 package com.aalaa.foodplanner.presentation.authentication;
 
-import com.aalaa.foodplanner.presentation.base.BaseView;
+import com.aalaa.foodplanner.presentation.authentication.base.BaseView;
 
 public interface AuthContract {
 

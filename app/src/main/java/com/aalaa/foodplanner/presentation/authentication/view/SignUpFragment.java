@@ -1,4 +1,4 @@
-package com.aalaa.foodplanner;
+package com.aalaa.foodplanner.presentation.authentication.view;
 
 import android.os.Bundle;
 import android.os.CancellationSignal;
@@ -27,6 +27,7 @@ import androidx.credentials.exceptions.NoCredentialException;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.aalaa.foodplanner.R;
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption;
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential;
 import com.google.firebase.auth.AuthCredential;
@@ -93,7 +94,7 @@ public class SignUpFragment extends Fragment {
                 .navigate(R.id.action_signup_to_login));
 
         btnGuest.setOnClickListener(v -> Navigation.findNavController(view)
-                .navigate(R.id.action_signup_to_home));
+                .navigate(R.id.action_signup_to_main));
 
         btnGoogle.setOnClickListener(v -> signInWithGoogle());
 
@@ -177,7 +178,7 @@ public class SignUpFragment extends Fragment {
                                 Toast.LENGTH_SHORT).show();
 
                         Navigation.findNavController(requireView())
-                                .navigate(R.id.action_signup_to_home);
+                                .navigate(R.id.action_signup_to_main);
 
                     } else {
                         Log.w(TAG, "createUserWithEmail:failure", task.getException());
@@ -290,7 +291,7 @@ public class SignUpFragment extends Fragment {
                                 Toast.LENGTH_SHORT).show();
 
                         Navigation.findNavController(requireView())
-                                .navigate(R.id.action_signup_to_home);
+                                .navigate(R.id.action_signup_to_main);
 
                     } else {
                         Log.w(TAG, "signInWithCredential:failure", task.getException());

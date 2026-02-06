@@ -38,19 +38,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/welcom_back"
-            android:textColor="@android:color/white"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            android:fontFamily="@font/nunito_black"
+            style="@style/TextAppearance.FoodPlanner.Display"
+            android:textColor="@color/auth_text"
             android:layout_marginBottom="4dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/login_tagline"
-            android:textColor="#B3FFFFFF"
-            android:textSize="13sp"
-            android:fontFamily="@font/nunito_regular"
+            style="@style/TextAppearance.FoodPlanner.Body.Secondary"
+            android:textColor="@color/auth_hint"
             android:layout_marginBottom="24dp"/>
 
         <androidx.cardview.widget.CardView
@@ -58,7 +55,7 @@
             android:layout_height="wrap_content"
             app:cardCornerRadius="16dp"
             app:cardElevation="0dp"
-            android:backgroundTint="#4D666666"
+            android:backgroundTint="@color/auth_input_bg"
             android:layout_marginBottom="12dp">
 
             <EditText
@@ -66,10 +63,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:hint="@string/email"
-                android:textColor="@android:color/white"
-                android:textColorHint="#80FFFFFF"
-                android:textSize="15sp"
-                android:fontFamily="@font/nunito_regular"
+                style="@style/TextAppearance.FoodPlanner.Body"
+                android:textColor="@color/auth_text"
+                android:textColorHint="@color/auth_hint"
                 android:inputType="textEmailAddress"
                 android:paddingStart="18dp"
                 android:paddingEnd="18dp"
@@ -81,7 +77,7 @@
             android:layout_height="wrap_content"
             app:cardCornerRadius="16dp"
             app:cardElevation="0dp"
-            android:backgroundTint="#4D666666"
+            android:backgroundTint="@color/auth_input_bg"
             android:layout_marginBottom="20dp">
 
             <RelativeLayout
@@ -94,8 +90,8 @@
                     android:layout_height="match_parent"
                     android:layout_toStartOf="@id/btn_toggle_password"
                     android:hint="@string/password"
-                    android:textColor="@android:color/white"
-                    android:textColorHint="#80FFFFFF"
+                    android:textColor="@color/auth_text"
+                    android:textColorHint="@color/auth_hint"
                     android:textSize="15sp"
                     android:fontFamily="@font/nunito_regular"
                     android:inputType="textPassword"
@@ -139,9 +135,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/or"
-                android:textColor="#80FFFFFF"
-                android:textSize="11sp"
-                android:fontFamily="@font/nunito_medium"
+                style="@style/TextAppearance.FoodPlanner.Label"
+                android:textColor="@color/auth_hint"
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"/>
 
@@ -167,7 +162,7 @@
                 android:layout_marginEnd="6dp"
                 app:cardCornerRadius="14dp"
                 app:cardElevation="0dp"
-                android:backgroundTint="#4D666666"
+                android:backgroundTint="@color/auth_input_bg"
                 android:clickable="true"
                 android:focusable="true">
 
@@ -187,7 +182,7 @@
                 android:layout_marginEnd="3dp"
                 app:cardCornerRadius="14dp"
                 app:cardElevation="0dp"
-                android:backgroundTint="#4D666666"
+                android:backgroundTint="@color/auth_input_bg"
                 android:clickable="true"
                 android:focusable="true">
 
@@ -206,7 +201,7 @@
                 android:layout_marginStart="52dp"
                 app:cardCornerRadius="14dp"
                 app:cardElevation="0dp"
-                android:backgroundTint="#4D666666"
+                android:backgroundTint="@color/auth_input_bg"
                 android:clickable="true"
                 android:focusable="true">
 
@@ -229,19 +224,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/dont_t_have_an_account"
-                android:textColor="#B3FFFFFF"
-                android:textSize="13sp"
-                android:fontFamily="@font/nunito_regular"/>
+                style="@style/TextAppearance.FoodPlanner.Body.Secondary"
+                android:textColor="@color/auth_hint"/>
 
             <TextView
                 android:id="@+id/btn_signup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/sign_up"
-                android:textColor="@color/accent_light"
-                android:textSize="13sp"
+                style="@style/TextAppearance.FoodPlanner.Label"
                 android:textStyle="bold"
-                android:fontFamily="@font/nunito_bold"
+                android:textColor="@color/accent_color"
                 android:layout_marginStart="4dp"
                 android:clickable="true"
                 android:focusable="true"
@@ -253,9 +246,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/continue_as_guest"
-            android:textColor="#80FFFFFF"
-            android:textSize="11sp"
-            android:fontFamily="@font/nunito_medium"
+            style="@style/TextAppearance.FoodPlanner.Label"
+            android:textColor="@color/auth_hint"
             android:letterSpacing="0.1"
             android:textAllCaps="true"
             android:clickable="true"

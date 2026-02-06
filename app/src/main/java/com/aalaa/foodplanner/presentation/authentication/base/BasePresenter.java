@@ -1,4 +1,4 @@
-package com.aalaa.foodplanner.presentation.base;
+package com.aalaa.foodplanner.presentation.authentication.base;
 
 import java.lang.ref.WeakReference;
 
