@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "304734293886",
+    "project_id": "food-planner-6be9f",
+    "storage_bucket": "food-planner-6be9f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:304734293886:android:5cc81780e401a7c5eaed2f",
+        "android_client_info": {
+          "package_name": "com.aalaa.foodplanner"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFtMwa6v0oZbwWbQqZUKsxZd2KNexKioc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
