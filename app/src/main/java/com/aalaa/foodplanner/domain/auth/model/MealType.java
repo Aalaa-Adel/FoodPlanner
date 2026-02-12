@@ -16,12 +16,4 @@ public enum MealType {
         return value;
     }
 
-    public static MealType fromValue(String value) {
-        for (MealType type : values()) {
-            if (type.value.equalsIgnoreCase(value)) {
-                return type;
-            }
-        }
-        throw new IllegalArgumentException("Unknown meal type: " + value);
-    }
 }

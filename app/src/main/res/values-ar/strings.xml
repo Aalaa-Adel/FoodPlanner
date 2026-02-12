@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MealMate</string>
+    <string name="mealmate">MealMate</string>
+    <string name="your_daily_meal_planner">مخطط وجباتك اليومي</string>
+    <string name="skip">تخطي</string>
+    <string name="get_started">ابدأ الآن</string>
+
+    <string name="slide1_headline">تخطيط ذكي للوجبات</string>
+    <string name="slide1_counter">أكثر من 1000 وصفة صحية</string>
+    <string name="slide1_subtitle">أنشئ خطة وجباتك الأسبوعية بسهولة.\nتصفح أكلات من مطابخ مختلفة واحفظ المفضلة في مكان واحد.</string>
+
+    <string name="slide2_headline">ابحث واكتشف</string>
+    <string name="ai_powered">وجبة اليوم</string>
+    <string name="slide2_subtitle">ابحث عن الأكلات بالمكونات أو التصنيف أو الدولة.\nاكتشف وجبة اليوم وجرب وصفات جديدة كل مرة.</string>
+
+    <string name="slide3_headline">خطّط • احفظ • افتح بسهولة</string>
+    <string name="always_accessible">يعمل بدون إنترنت</string>
+    <string name="slide3_subtitle">احفظ وجباتك المفضلة وافتحها بدون إنترنت،\nوخلي بياناتك متزامنة بأمان على كل أجهزتك.</string>
+
+    <string name="food_image">صورة طعام</string>
+    <string name="version">الإصدار 1.0</string>
+    <string name="app_tagline">مخطط وجباتك اليومي</string>
+    <string name="next">التالي</string>
+
+    <string name="title_activity_auth">AuthActivity</string>
+
+    <string name="title_onboarding1">اكتشف وجبات لذيذة</string>
+    <string name="title_onboarding2">خطّط أسبوعك بسهولة</string>
+    <string name="title_onboarding3">احفظ واطبخ بدون إنترنت</string>
+
+    <string name="subtitle_onboarding1">تصفح آلاف الوصفات المميزة مع Plato.</string>
+    <string name="subtitle_onboarding2">رتّب الفطار والغداء والعشاء في ثواني.</string>
+    <string name="subtitle_onboarding3">وصل لخطة وجباتك في أي مكان مع Plato بدون إنترنت.</string>
+
+    <string name="hello_blank_fragment">مرحباً</string>
+
+    <string name="welcom_back">مرحباً بعودتك</string>
+    <string name="login_tagline">جاهز لوجبتك الجورميه الجاية؟</string>
+
+    <string name="email">البريد الإلكتروني</string>
+    <string name="password">كلمة المرور</string>
+    <string name="login">تسجيل الدخول</string>
+
+    <string name="or">أو</string>
+    <string name="dont_t_have_an_account">ليس لديك حساب؟</string>
+    <string name="sign_up">إنشاء حساب</string>
+    <string name="continue_as_guest">المتابعة كضيف</string>
+
+    <string name="sign_up_title">إنشاء حساب</string>
+    <string name="sign_up_tagline">انضم إلى FoodPlanner وابدأ تخطيط وجباتك!</string>
+
+    <string name="confirm_password">تأكيد كلمة المرور</string>
+    <string name="already_have_account">لديك حساب بالفعل؟</string>
+
+    <string name="welcome_to_plato">مرحباً بك في PLATO</string>
+    <string name="hi_chef_sarah">أهلاً يا شيف سارة!</string>
+
+    <string name="search_recipes_ingredients">ابحث عن وصفات، مكونات...</string>
+
+    <string name="meal_of_the_day">وجبة اليوم</string>
+    <string name="truffle_mushroom_pasta">مكرونة بالمشروم والكمأة</string>
+
+    <string name="trending">الأكثر رواجاً</string>
+    <string name="for_you">مُقترح لك</string>
+    <string name="see_all">عرض الكل</string>
+
+    <string name="categories">التصنيفات</string>
+    <string name="countries">الدول</string>
+
+    <string name="vegan">نباتي</string>
+    <string name="dessert">حلويات</string>
+    <string name="seafood">مأكولات بحرية</string>
+    <string name="italian">إيطالي</string>
+
+    <string name="italy">إيطاليا</string>
+    <string name="japan">اليابان</string>
+    <string name="mexico">المكسيك</string>
+    <string name="india">الهند</string>
+
+    <string name="meal_image">صورة الوجبة</string>
+    <string name="bookmark">حفظ</string>
+    <string name="profile_avatar">صورة الملف الشخصي</string>
+    <string name="back">رجوع</string>
+
+    <string name="favorite">المفضلة</string>
+    <string name="rating">التقييم</string>
+
+    <string name="add_to_meal_plan">إضافة إلى خطة الوجبات</string>
+    <string name="add">إضافة</string>
+
+    <string name="ingredient">المكونات</string>
+
+    <string name="video_thumbnail">صورة مصغرة للفيديو</string>
+    <string name="play_video">تشغيل الفيديو</string>
+    <string name="video_cooking_tutorial">شاهد شرح الطبخ خطوة بخطوة لهذه الوصفة اللذيذة.</string>
+
+    <string name="ingredients_tab">المكونات</string>
+    <string name="steps_tab">الخطوات</string>
+    <string name="video_tab">فيديو</string>
+
+    <!-- لا تغيّره -->
+    <string name="default_web_client_id">304734293886-otm5fkce9atjhuli5t6rlndddsq2pu0a.apps.googleusercontent.com</string>
+
+    <string name="favorites">المفضلة</string>
+    <string name="no_favorites_yet">لا توجد مفضلة بعد</string>
+
+    <string name="username">اسم المستخدم</string>
+
+    <string name="add_to_plan">إضافة للخطة</string>
+    <string name="cancel">إلغاء</string>
+
+    <string name="dinner">عشاء</string>
+    <string name="lunch">غداء</string>
+    <string name="breakfast">فطور</string>
+
+    <string name="select_meal_time">اختر وقت الوجبة</string>
+
+    <string name="no_date_selected">لم يتم اختيار تاريخ</string>
+    <string name="select_date">اختر التاريخ</string>
+
+    <string name="add_to_meal_plan2">إضافة إلى خطة الوجبات</string>
+
+    <string name="logout_confirmation_title">تأكيد تسجيل الخروج</string>
+    <string name="logout_confirmation_message">هل تريد تسجيل الخروج؟</string>
+    <string name="sync_and_logout">مزامنة ثم تسجيل الخروج</string>
+    <string name="logout_without_sync">تسجيل الخروج بدون مزامنة</string>
+
+    <string name="p">P</string>
+
+    <string name="meal_plans">خطط الوجبات</string>
+    <string name="no_planned_meals">لا توجد وجبات مخطط لها</string>
+
+    <string name="user_name_placeholder">اسم المستخدم</string>
+    <string name="user_email_placeholder">البريد الإلكتروني</string>
+
+    <string name="settings">الإعدادات</string>
+    <string name="dark_mode">الوضع الداكن</string>
+    <string name="language">اللغة</string>
+    <string name="english">الإنجليزية</string>
+
+    <string name="data_management">إدارة البيانات</string>
+    <string name="backup_data">نسخ احتياطي للبيانات</string>
+    <string name="restore_data">استعادة البيانات</string>
+
+    <string name="account">الحساب</string>
+    <string name="logout">تسجيل الخروج</string>
+
+    <string name="search">بحث</string>
+    <string name="search_results">نتائج البحث</string>
+    <string name="no_results_found">لا توجد نتائج</string>
+
+    <string name="watch_the_complete_step_by_step_cooking_tutorial">شاهد الشرح خطوة بخطوة.</string>
+
+    <string name="category">التصنيف</string>
+    <string name="meal_name">اسم الوجبة</string>
+    <string name="category_area">التصنيف | الدولة</string>
+
+    <string name="fresh_ingredient_1">مكون طازج 1</string>
+    <string name="optional_description">وصف اختياري</string>
+
+    <string name="_100g">100 جم</string>
+    <string name="_12_ing">• 12 مكون</string>
+
+    <string name="premium_sushi_platter">طبق سوشي بريميوم</string>
+    <string name="meal_name1">اسم الوجبة</string>
+    <string name="monday_breakfast">الاثنين - فطور</string>
+    <string name="category_area1">التصنيف | الدولة</string>
+
+    <string name="heat_olive_oil_in_a_large_pan_over_medium_heat">سخّن زيت الزيتون في مقلاة كبيرة على نار متوسطة.</string>
+
+    <string name="profile">الملف الشخصي</string>
+    <string name="hi_chef">أهلاً يا شيف</string>
+
+</resources>

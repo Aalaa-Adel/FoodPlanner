@@ -16,7 +16,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.aalaa.foodplanner.presentation.authentication.view.LoginFragment">
+        android:name="com.aalaa.foodplanner.ui.authentication.view.LoginFragment">
 
         <action
             android:id="@+id/action_login_to_signup"
@@ -24,18 +24,22 @@
 
         <action
             android:id="@+id/action_login_to_main"
-            app:destination="@id/mainFragment" />
+            app:destination="@id/main_graph"
+            app:popUpTo="@id/auth_graph"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.aalaa.foodplanner.presentation.authentication.view.SignUpFragment">
+        android:name="com.aalaa.foodplanner.ui.authentication.view.SignUpFragment">
         <action
             android:id="@+id/action_signup_to_login"
             app:destination="@id/loginFragment" />
         <action
             android:id="@+id/action_signup_to_main"
-            app:destination="@id/mainFragment" />
+            app:destination="@id/main_graph"
+            app:popUpTo="@id/auth_graph"
+            app:popUpToInclusive="true" />
     </fragment>
 
 </navigation>

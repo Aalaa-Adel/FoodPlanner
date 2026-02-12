@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.google.services)
 }
 
+apply(plugin = "androidx.navigation.safeargs")
+
 android {
     namespace = "com.aalaa.foodplanner"
     compileSdk {
@@ -71,23 +73,25 @@ dependencies {
     implementation(libs.room.runtime)
     annotationProcessor(libs.room.compiler)
     implementation(libs.roomrx)
+    implementation(libs.youtubePlayer)
     implementation ("io.reactivex.rxjava3:rxjava:3.1.8")
-    implementation ("io.reactivex.rxjava3:rxandroid:3.0.2")
 
-    // Firebase
+
+    implementation ("io.reactivex.rxjava3:rxandroid:3.0.2")
+    implementation("com.squareup.retrofit2:adapter-rxjava3:2.9.0")
+
     implementation ("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-firestore")
 
-    // Google Credential Manager
     implementation ("androidx.credentials:credentials:1.2.2")
     implementation ("androidx.credentials:credentials-play-services-auth:1.2.2")
     implementation ("com.google.android.libraries.identity.googleid:googleid:1.1.0")
 
-    // Material Design
     implementation ("com.google.android.material:material:1.11.0")
 
-    // Navigation
     implementation ("androidx.navigation:navigation-fragment:2.7.6")
     implementation ("androidx.navigation:navigation-ui:2.7.6")
+    implementation("com.pierfrancescosoffritti.androidyoutubeplayer:core:13.0.0")
+    implementation("com.pierfrancescosoffritti.androidyoutubeplayer:custom-ui:13.0.0")
 
 }

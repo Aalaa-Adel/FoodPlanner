@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- item_ingredient.xml - Single Ingredient Item -->
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,7 +7,7 @@
     android:layout_marginBottom="12dp"
     app:cardCornerRadius="14dp"
     app:cardElevation="0dp"
-    app:cardBackgroundColor="@color/card_light">
+    android:background="@drawable/bg_skip">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,8 +16,7 @@
         android:gravity="center_vertical"
         android:padding="16dp">
 
-        <!-- Ingredient Image Placeholder -->
-        <androidx.cardview.widget.CardView
+\        <androidx.cardview.widget.CardView
             android:layout_width="52dp"
             android:layout_height="52dp"
             app:cardCornerRadius="12dp"
@@ -35,7 +33,6 @@
                 android:contentDescription="@string/ingredient"/>
         </androidx.cardview.widget.CardView>
 
-        <!-- Ingredient Details -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -46,7 +43,7 @@
                 android:id="@+id/tv_ingredient_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Fresh Ingredient 1"
+                android:text="@string/fresh_ingredient_1"
                 style="@style/TextAppearance.FoodPlanner.Body"
                 android:fontFamily="@font/nunito_bold"
                 android:layout_marginBottom="2dp"/>
@@ -55,18 +52,17 @@
                 android:id="@+id/tv_ingredient_note"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Optional description"
+                android:text="@string/optional_description"
                 style="@style/TextAppearance.FoodPlanner.Label"
                 android:fontFamily="@font/nunito_regular"
                 android:visibility="gone"/>
         </LinearLayout>
 
-        <!-- Quantity -->
         <TextView
             android:id="@+id/tv_ingredient_quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="100g"
+            android:text="@string/_100g"
             style="@style/TextAppearance.FoodPlanner.Body.Secondary"
             android:fontFamily="@font/nunito_bold"
             android:layout_marginStart="12dp"/>

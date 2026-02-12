@@ -5,33 +5,80 @@
     android:id="@+id/main_graph"
     app:startDestination="@id/homeFragment">
 
+<fragment
+        android:id="@+id/categoriesFragment"
+        android:name="com.aalaa.foodplanner.ui.categories.view.CategoriesFragment">
+        <action
+            android:id="@+id/action_categoriesFragment_to_mealsListingFragment"
+            app:destination="@id/mealsListingFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/countriesFragment"
+        android:name="com.aalaa.foodplanner.ui.countries.view.CountriesFragment">
+        <action
+            android:id="@+id/action_countriesFragment_to_mealsListingFragment"
+            app:destination="@id/mealsListingFragment" />
+    </fragment>
+
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.aalaa.foodplanner.HomeFragment">
+        android:name="com.aalaa.foodplanner.ui.home.view.HomeFragment">
 
         <action
             android:id="@+id/action_home_to_recipe_detail"
             app:destination="@id/recipeDetailFragment"/>
+        <action
+            android:id="@+id/action_home_to_meals_listing"
+            app:destination="@id/mealsListingFragment"/>
+        <action
+            android:id="@+id/action_homeFragment_to_categoriesFragment"
+            app:destination="@id/categoriesFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_countriesFragment"
+            app:destination="@id/countriesFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.aalaa.foodplanner.SearchFragment"/>
+        android:name="com.aalaa.foodplanner.ui.search.view.SearchFragment">
+        <action
+            android:id="@+id/action_searchFragment_to_recipeDetailFragment"
+            app:destination="@id/recipeDetailFragment"/>
+    </fragment>
 
     <fragment
         android:id="@+id/favoriteFragment"
-        android:name="com.aalaa.foodplanner.FavoriteFragment"/>
+        android:name="com.aalaa.foodplanner.ui.favorites.view.FavoritesFragment"/>
 
     <fragment
         android:id="@+id/planFragment"
-        android:name="com.aalaa.foodplanner.PlanFragment"/>
+        android:name="com.aalaa.foodplanner.ui.plans.view.PlanFragment"/>
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.aalaa.foodplanner.ProfileFragment"/>
+        android:name="com.aalaa.foodplanner.ui.profile.view.ProfileFragment"/>
 
     <fragment
         android:id="@+id/recipeDetailFragment"
-        android:name="com.aalaa.foodplanner.RecipeDetailFragment"/>
+        android:name="com.aalaa.foodplanner.ui.detail.view.RecipeDetailFragment">
+        <argument
+            android:name="meal"
+            app:argType="com.aalaa.foodplanner.domain.models.MealsItem"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/mealsListingFragment"
+        android:name="com.aalaa.foodplanner.ui.listing.view.MealsListingFragment">
+        <argument
+            android:name="type"
+            app:argType="string"/>
+        <argument
+            android:name="value"
+            app:argType="string"/>
+        <action
+            android:id="@+id/action_listing_to_detail"
+            app:destination="@id/recipeDetailFragment"/>
+    </fragment>
 
 </navigation>

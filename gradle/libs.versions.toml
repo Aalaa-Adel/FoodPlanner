@@ -21,6 +21,8 @@ googleid = "1.2.0"
 firebaseBom = "34.8.0"
 room= "2.8.4"
 rotrofit = "3.0.0"
+youtubePlayer = "12.1.0"
+
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -55,6 +57,8 @@ room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 rotrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "rotrofit"}
 roomrx = { group = "androidx.room", name = "room-rxjava3", version.ref = "room" }
+youtubePlayer = { group = "com.pierfrancescosoffritti.androidyoutubeplayer", name = "core", version.ref = "youtubePlayer" }
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
