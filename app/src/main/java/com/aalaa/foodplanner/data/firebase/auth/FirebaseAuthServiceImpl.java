@@ -23,6 +23,7 @@ public class FirebaseAuthServiceImpl implements FirebaseAuthService {
         return Single.create(emitter -> {
             firebaseAuth.signInWithEmailAndPassword(email, password)
                     .addOnSuccessListener(result -> {
+                        if (emitter.isDisposed()) return;
                         FirebaseUser firebaseUser = result.getUser();
                         if (firebaseUser != null) {
                             emitter.onSuccess(toUser(firebaseUser));
@@ -30,7 +31,10 @@ public class FirebaseAuthServiceImpl implements FirebaseAuthService {
                             emitter.onError(new Exception("Sign in failed"));
                         }
                     })
-                    .addOnFailureListener(e -> emitter.onError(new Exception(parseError(e))));
+                    .addOnFailureListener(e -> {
+                        if (emitter.isDisposed()) return;
+                        emitter.onError(new Exception(parseError(e)));
+                    });
         });
     }
 
@@ -39,23 +43,31 @@ public class FirebaseAuthServiceImpl implements FirebaseAuthService {
         return Single.create(emitter -> {
             firebaseAuth.createUserWithEmailAndPassword(email, password)
                     .addOnSuccessListener(result -> {
-                        FirebaseUser firebaseUser = result.getUser();
-                        if (firebaseUser != null) {
-                            if (displayName != null && !displayName.isEmpty()) {
-                                UserProfileChangeRequest profile = new UserProfileChangeRequest.Builder()
-                                        .setDisplayName(displayName)
-                                        .build();
+                        if (emitter.isDisposed()) return;
 
-                                firebaseUser.updateProfile(profile)
-                                        .addOnCompleteListener(task -> emitter.onSuccess(toUser(firebaseUser)));
-                            } else {
-                                emitter.onSuccess(toUser(firebaseUser));
-                            }
-                        } else {
+                        FirebaseUser firebaseUser = result.getUser();
+                        if (firebaseUser == null) {
                             emitter.onError(new Exception("Sign up failed"));
+                            return;
+                        }
+                        if (displayName != null && !displayName.trim().isEmpty()) {
+                            UserProfileChangeRequest profileUpdates =
+                                    new UserProfileChangeRequest.Builder()
+                                            .setDisplayName(displayName.trim())
+                                            .build();
+                            firebaseUser.updateProfile(profileUpdates)
+                                    .addOnCompleteListener(task -> {
+                                        if (emitter.isDisposed()) return;
+                                        emitter.onSuccess(toUser(firebaseUser));
+                                    });
+                        } else {
+                            emitter.onSuccess(toUser(firebaseUser));
                         }
                     })
-                    .addOnFailureListener(e -> emitter.onError(new Exception(parseError(e))));
+                    .addOnFailureListener(e -> {
+                        if (emitter.isDisposed()) return;
+                        emitter.onError(new Exception(parseError(e)));
+                    });
         });
     }
 
@@ -63,9 +75,9 @@ public class FirebaseAuthServiceImpl implements FirebaseAuthService {
     public Single<User> signInWithGoogleToken(String idToken) {
         return Single.create(emitter -> {
             AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
-
             firebaseAuth.signInWithCredential(credential)
                     .addOnSuccessListener(result -> {
+                        if (emitter.isDisposed()) return;
                         FirebaseUser firebaseUser = result.getUser();
                         if (firebaseUser != null) {
                             emitter.onSuccess(toUser(firebaseUser));
@@ -73,13 +85,16 @@ public class FirebaseAuthServiceImpl implements FirebaseAuthService {
                             emitter.onError(new Exception("Google sign in failed"));
                         }
                     })
-                    .addOnFailureListener(e -> emitter.onError(new Exception(parseError(e))));
+                    .addOnFailureListener(e -> {
+                        if (emitter.isDisposed()) return;
+                        emitter.onError(new Exception(parseError(e)));
+                    });
         });
     }
 
     @Override
     public Completable signOut() {
-        return Completable.fromAction(() -> firebaseAuth.signOut());
+        return Completable.fromAction(firebaseAuth::signOut);
     }
 
     @Override
