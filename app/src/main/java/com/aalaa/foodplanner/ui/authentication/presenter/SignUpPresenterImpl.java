@@ -1,41 +1,36 @@
-package com.aalaa.foodplanner.presentation.authentication.presenter;
+package com.aalaa.foodplanner.ui.authentication.presenter;
 
 import android.text.TextUtils;
 import android.util.Patterns;
 
-import com.aalaa.foodplanner.data.repository.AuthRepository;
-import com.aalaa.foodplanner.data.repository.AuthRepositoryImpl;
-import com.aalaa.foodplanner.presentation.authentication.AuthContract;
-import com.aalaa.foodplanner.presentation.authentication.base.BasePresenter;
+import com.aalaa.foodplanner.domain.repository.AuthRepository;
+import com.aalaa.foodplanner.ui.authentication.base.BasePresenter;
+import com.aalaa.foodplanner.ui.authentication.view.SignUpView;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class SignUpPresenter extends BasePresenter<AuthContract.SignUpView>
-        implements AuthContract.SignUpPresenter {
+public class SignUpPresenterImpl extends BasePresenter<SignUpView>
+        implements SignUpPresenter {
 
     private final AuthRepository repository;
 
-    public SignUpPresenter() {
-        this.repository = new AuthRepositoryImpl();
-    }
-
-    public SignUpPresenter(AuthRepository repository) {
+    public SignUpPresenterImpl(AuthRepository repository) {
         this.repository = repository;
     }
 
     @Override
-    public void signUp(String email, String password, String confirmPassword) {
+    public void signUp(String username, String email, String password, String confirmPassword) {
         if (!isViewAttached()) return;
 
         getView().clearErrors();
 
-        if (!validateInput(email, password, confirmPassword)) return;
+        if (!validateInput(username, email, password, confirmPassword)) return;
 
         getView().showLoading();
 
         addDisposable(
-                repository.signUpWithEmail(email, password)
+                repository.signUpWithEmail(email, password, username)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
@@ -82,8 +77,16 @@ public class SignUpPresenter extends BasePresenter<AuthContract.SignUpView>
         );
     }
 
-    private boolean validateInput(String email, String password, String confirmPassword) {
+    private boolean validateInput(String username, String email, String password, String confirmPassword) {
         boolean valid = true;
+
+        if (TextUtils.isEmpty(username)) {
+            getView().showUsernameError("Username is required");
+            valid = false;
+        } else if (username.length() < 3) {
+            getView().showUsernameError("Username must be at least 3 characters");
+            valid = false;
+        }
 
         if (TextUtils.isEmpty(email)) {
             getView().showEmailError("Email is required");

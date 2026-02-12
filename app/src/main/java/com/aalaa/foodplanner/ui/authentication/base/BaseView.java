@@ -1,4 +1,4 @@
-package com.aalaa.foodplanner.presentation.authentication.base;
+package com.aalaa.foodplanner.ui.authentication.base;
 
 public interface BaseView {
     void showLoading();

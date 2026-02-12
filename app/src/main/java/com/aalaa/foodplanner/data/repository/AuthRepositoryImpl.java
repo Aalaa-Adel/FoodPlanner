@@ -10,6 +10,7 @@ import com.aalaa.foodplanner.domain.auth.model.MealPlan;
 import com.aalaa.foodplanner.domain.auth.model.MealType;
 import com.aalaa.foodplanner.domain.auth.model.User;
 import com.aalaa.foodplanner.domain.auth.model.UserSettings;
+import com.aalaa.foodplanner.domain.repository.AuthRepository;
 
 import java.util.List;
 
@@ -38,13 +39,14 @@ public class AuthRepositoryImpl implements AuthRepository {
     }
 
     @Override
-    public Single<User> signUpWithEmail(String email, String password) {
-        return authService.signUpWithEmail(email, password, "")
+    public Single<User> signUpWithEmail(String email, String password, String displayName) {
+        return authService.signUpWithEmail(email, password, displayName)
                 .flatMap(user -> firestoreService.createUser(user)
                         .andThen(Single.just(user))
                         .onErrorResumeNext(e -> Single.just(user)))
-                .flatMap(this::onAuthSuccess);
-    }
+                .flatMap(this::onAuthSuccess);}
+
+
 
     @Override
     public Single<User> signInWithGoogle(String idToken) {
@@ -184,103 +186,7 @@ public class AuthRepositoryImpl implements AuthRepository {
         return sessionManager.isFavorite(mealId);
     }
 
-    @Override
-    public Single<MealPlan> getMealPlan() {
-        String userId = authService.getCurrentUserId();
-        if (userId == null) {
-            return Single.error(new Exception("User not logged in"));
-        }
 
-        return firestoreService.getMealPlan(userId)
-                .doOnSuccess(sessionManager::setMealPlan);
-    }
-
-    @Override
-    public Single<DayMeals> getDayMeals(String date) {
-        String userId = authService.getCurrentUserId();
-        if (userId == null) {
-            return Single.error(new Exception("User not logged in"));
-        }
-
-        MealPlan cachedPlan = sessionManager.getMealPlan();
-        if (cachedPlan != null) {
-            DayMeals cachedDay = cachedPlan.getDayMeals(date);
-            if (cachedDay != null) {
-                return Single.just(cachedDay);
-            }
-        }
-
-        return firestoreService.getDayMeals(userId, date)
-                .doOnSuccess(dayMeals -> {
-                    MealPlan plan = sessionManager.getMealPlan();
-                    if (plan == null) {
-                        plan = new MealPlan();
-                        sessionManager.setMealPlan(plan);
-                    }
-                    plan.setDayMeals(date, dayMeals);
-                });
-    }
-
-    @Override
-    public Completable setDayMeals(String date, DayMeals dayMeals) {
-        String userId = authService.getCurrentUserId();
-        if (userId == null) {
-            return Completable.error(new Exception("User not logged in"));
-        }
-
-        MealPlan plan = sessionManager.getMealPlan();
-        if (plan == null) {
-            plan = new MealPlan();
-            sessionManager.setMealPlan(plan);
-        }
-        plan.setDayMeals(date, dayMeals);
-
-        return firestoreService.setDayMeals(userId, date, dayMeals);
-    }
-
-    @Override
-    public Completable setMealForDay(String date, MealType mealType, String mealId) {
-        String userId = authService.getCurrentUserId();
-        if (userId == null) {
-            return Completable.error(new Exception("User not logged in"));
-        }
-
-        MealPlan plan = sessionManager.getMealPlan();
-        if (plan == null) {
-            plan = new MealPlan();
-            sessionManager.setMealPlan(plan);
-        }
-
-        DayMeals dayMeals = plan.getDayMeals(date);
-        if (dayMeals == null) {
-            dayMeals = new DayMeals();
-        }
-        dayMeals.setMeal(mealType, mealId);
-        plan.setDayMeals(date, dayMeals);
-
-        return firestoreService.setMealForDay(userId, date, mealType, mealId);
-    }
-
-    @Override
-    public Completable removeMealFromDay(String date, MealType mealType) {
-        String userId = authService.getCurrentUserId();
-        if (userId == null) {
-            return Completable.error(new Exception("User not logged in"));
-        }
-
-        MealPlan plan = sessionManager.getMealPlan();
-        if (plan != null) {
-            DayMeals dayMeals = plan.getDayMeals(date);
-            if (dayMeals != null) {
-                dayMeals.clearMeal(mealType);
-                if (dayMeals.isEmpty()) {
-                    plan.removeDayMeals(date);
-                }
-            }
-        }
-
-        return firestoreService.removeMealFromDay(userId, date, mealType);
-    }
 
     private Single<User> onAuthSuccess(User user) {
         preferencesHelper.setLoggedIn(true);

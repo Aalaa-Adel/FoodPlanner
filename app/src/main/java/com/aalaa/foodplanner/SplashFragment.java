@@ -13,14 +13,9 @@ public class SplashFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+            Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_splash, container, false);
-
-        new Handler().postDelayed(() ->
-                        NavHostFragment.findNavController(this)
-                                .navigate(R.id.action_splash_to_auth)
-                ,5000);
 
         return view;
     }

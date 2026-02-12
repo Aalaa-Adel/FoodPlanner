@@ -1,4 +1,4 @@
-package com.aalaa.foodplanner.presentation.authentication.view;
+package com.aalaa.foodplanner.ui.authentication.view;
 
 import android.os.Bundle;
 import android.os.CancellationSignal;
@@ -9,9 +9,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
+import com.aalaa.foodplanner.ui.common.AppSnack;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,92 +27,77 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.aalaa.foodplanner.R;
-import com.aalaa.foodplanner.presentation.authentication.AuthContract;
-import com.aalaa.foodplanner.presentation.authentication.presenter.LoginPresenter;
+import com.aalaa.foodplanner.data.repository.AuthRepositoryImpl;
+import com.aalaa.foodplanner.ui.authentication.presenter.SignUpPresenterImpl;
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption;
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.GoogleAuthProvider;
 
 import java.util.concurrent.Executors;
 
-public class LoginFragment extends Fragment implements AuthContract.LoginView {
+public class SignUpFragment extends Fragment implements SignUpView {
 
-    private static final String TAG = "LoginFragment";
+    private static final String TAG = "SignUpFragment";
 
-    private LoginPresenter presenter;
-
+    private SignUpPresenterImpl presenter;
     private CredentialManager credentialManager;
-    private EditText etEmail, etPassword;
-    private ImageView btnTogglePassword;
-    private Button btnLogin;
-    private CardView btnGoogle, btnFacebook, btnTwitter;
-    private TextView btnSignup, btnGuest;
-    private ProgressBar progressBar;
+
+    private EditText etUsername, etEmail, etPassword, etConfirmPassword;
+    private ImageView btnTogglePassword, btnToggleConfirmPassword;
+    private Button btnSignupAction;
+    private CardView btnGoogle;
+    private TextView btnLogin, btnGuest;
 
     private boolean isPasswordVisible = false;
+    private boolean isConfirmPasswordVisible = false;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
             @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_login, container, false);
+        View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
 
         credentialManager = CredentialManager.create(requireContext());
 
         initViews(view);
+        setupPresenter();
         setupClickListeners(view);
 
         return view;
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        presenter = new LoginPresenter();
-        presenter.attachView(this);
-    }
-
     private void initViews(View view) {
+        etUsername = view.findViewById(R.id.et_username);
         etEmail = view.findViewById(R.id.et_email);
         etPassword = view.findViewById(R.id.et_password);
+        etConfirmPassword = view.findViewById(R.id.et_confirm_password);
         btnTogglePassword = view.findViewById(R.id.btn_toggle_password);
-        btnLogin = view.findViewById(R.id.btn_login);
+        btnToggleConfirmPassword = view.findViewById(R.id.btn_toggle_confirm_password);
+        btnSignupAction = view.findViewById(R.id.btn_signup_action);
         btnGoogle = view.findViewById(R.id.btn_google);
-        btnFacebook = view.findViewById(R.id.btn_facebook);
-        btnTwitter = view.findViewById(R.id.btn_twitter);
-        btnSignup = view.findViewById(R.id.btn_signup);
+        btnLogin = view.findViewById(R.id.btn_login);
         btnGuest = view.findViewById(R.id.btn_guest);
-        // progressBar = view.findViewById(R.id.progress_bar);
+    }
+
+    private void setupPresenter() {
+        AuthRepositoryImpl repository = new AuthRepositoryImpl();
+        presenter = new SignUpPresenterImpl(repository);
+        presenter.attachView(this);
     }
 
     private void setupClickListeners(View view) {
         btnTogglePassword.setOnClickListener(v -> togglePasswordVisibility());
+        btnToggleConfirmPassword.setOnClickListener(v -> toggleConfirmPasswordVisibility());
 
-        btnLogin.setOnClickListener(v -> {
-            String email = etEmail.getText().toString().trim();
-            String password = etPassword.getText().toString().trim();
-            presenter.login(email, password);
-        });
+        btnSignupAction.setOnClickListener(v -> signUp());
 
-        btnSignup.setOnClickListener(v -> Navigation.findNavController(view)
-                .navigate(R.id.action_login_to_signup));
+        btnLogin.setOnClickListener(v -> Navigation.findNavController(view)
+                .navigate(R.id.action_signup_to_login));
 
         btnGuest.setOnClickListener(v -> Navigation.findNavController(view)
-                .navigate(R.id.action_login_to_main));
+                .navigate(R.id.action_signup_to_main));
 
         btnGoogle.setOnClickListener(v -> signInWithGoogle());
-
-        btnFacebook.setOnClickListener(v -> Toast.makeText(requireContext(),
-                "Facebook Sign-In - Coming Soon",
-                Toast.LENGTH_SHORT).show());
-
-        btnTwitter.setOnClickListener(v -> Toast.makeText(requireContext(),
-                "Twitter Sign-In - Coming Soon",
-                Toast.LENGTH_SHORT).show());
     }
 
     private void togglePasswordVisibility() {
@@ -130,6 +114,31 @@ public class LoginFragment extends Fragment implements AuthContract.LoginView {
         }
         isPasswordVisible = !isPasswordVisible;
         etPassword.setSelection(etPassword.getText().length());
+    }
+
+    private void toggleConfirmPasswordVisibility() {
+        if (isConfirmPasswordVisible) {
+            etConfirmPassword.setInputType(
+                    android.text.InputType.TYPE_CLASS_TEXT |
+                            android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            btnToggleConfirmPassword.setImageResource(R.drawable.ic_eye);
+        } else {
+            etConfirmPassword.setInputType(
+                    android.text.InputType.TYPE_CLASS_TEXT |
+                            android.text.InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            btnToggleConfirmPassword.setImageResource(R.drawable.ic_eye_off);
+        }
+        isConfirmPasswordVisible = !isConfirmPasswordVisible;
+        etConfirmPassword.setSelection(etConfirmPassword.getText().length());
+    }
+
+    private void signUp() {
+        String username = etUsername.getText().toString().trim();
+        String email = etEmail.getText().toString().trim();
+        String password = etPassword.getText().toString().trim();
+        String confirmPassword = etConfirmPassword.getText().toString().trim();
+
+        presenter.signUp(username, email, password, confirmPassword);
     }
 
     private void signInWithGoogle() {
@@ -155,32 +164,31 @@ public class LoginFragment extends Fragment implements AuthContract.LoginView {
                 new CredentialManagerCallback<GetCredentialResponse, GetCredentialException>() {
                     @Override
                     public void onResult(GetCredentialResponse result) {
-                        requireActivity().runOnUiThread(() -> handleGoogleSignInResult(result));
+                        requireActivity().runOnUiThread(() -> handleSignInResult(result));
                     }
 
                     @Override
                     public void onError(@NonNull GetCredentialException e) {
-                        requireActivity().runOnUiThread(() -> handleGoogleSignInError(e));
+                        requireActivity().runOnUiThread(() -> handleSignInError(e));
                     }
                 });
     }
 
-    private void handleGoogleSignInResult(GetCredentialResponse response) {
+    private void handleSignInResult(GetCredentialResponse response) {
         Credential credential = response.getCredential();
 
         if (credential instanceof CustomCredential) {
             CustomCredential customCredential = (CustomCredential) credential;
 
-            if (GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL.equals(customCredential.getType())) {
+            if (GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL.equals(
+                    customCredential.getType())) {
                 try {
                     GoogleIdTokenCredential googleIdTokenCredential = GoogleIdTokenCredential
                             .createFrom(customCredential.getData());
                     String idToken = googleIdTokenCredential.getIdToken();
 
                     Log.d(TAG, "Google Sign-In successful");
-                    Log.d(TAG, "User Email: " + googleIdTokenCredential.getId());
-
-                    firebaseAuthWithGoogle(idToken);
+                    presenter.signUpWithGoogle(idToken);
 
                 } catch (Exception e) {
                     Log.e(TAG, "Error extracting Google ID token", e);
@@ -194,24 +202,7 @@ public class LoginFragment extends Fragment implements AuthContract.LoginView {
         }
     }
 
-    private void firebaseAuthWithGoogle(String idToken) {
-        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
-
-        FirebaseAuth.getInstance().signInWithCredential(credential)
-                .addOnCompleteListener(requireActivity(), task -> {
-                    hideLoading();
-                    if (task.isSuccessful()) {
-                        Log.d(TAG, "signInWithCredential:success");
-                        showSuccess("Google Sign-In successful");
-                        Navigation.findNavController(requireView()).navigate(R.id.action_login_to_main);
-                    } else {
-                        Log.w(TAG, "signInWithCredential:failure", task.getException());
-                        showError("Firebase authentication failed: " + task.getException().getMessage());
-                    }
-                });
-    }
-
-    private void handleGoogleSignInError(GetCredentialException e) {
+    private void handleSignInError(GetCredentialException e) {
         hideLoading();
         Log.e(TAG, "Google Sign-In error", e);
 
@@ -227,59 +218,75 @@ public class LoginFragment extends Fragment implements AuthContract.LoginView {
         showError(errorMessage);
     }
 
+
+    @Override
+    public void showUsernameError(String error) {
+        etUsername.setError(error);
+        etUsername.requestFocus();
+    }
+
     @Override
     public void showEmailError(String error) {
-        // TODO: Implement error showing properly
+        etEmail.setError(error);
+        etEmail.requestFocus();
     }
 
     @Override
     public void showPasswordError(String error) {
-        // TODO: Implement error showing properly
+        etPassword.setError(error);
+        etPassword.requestFocus();
+    }
+
+    @Override
+    public void showConfirmPasswordError(String error) {
+        etConfirmPassword.setError(error);
+        etConfirmPassword.requestFocus();
     }
 
     @Override
     public void clearErrors() {
-        // TODO: Implement clear errors
+        etUsername.setError(null);
+        etEmail.setError(null);
+        etPassword.setError(null);
+        etConfirmPassword.setError(null);
     }
 
     @Override
-    public void onLoginSuccess() {
-        Toast.makeText(requireContext(), "Login Success", Toast.LENGTH_SHORT).show();
+    public void onSignUpSuccess() {
+        AppSnack.showSuccess(requireView(), "Account Created Successfully");
         Navigation.findNavController(requireView())
-                .navigate(R.id.action_login_to_main);
+                .navigate(R.id.action_signup_to_main);
     }
 
     @Override
     public void showLoading() {
-        // progressBar.setVisibility(View.VISIBLE);
-        btnLogin.setEnabled(false);
+        btnSignupAction.setEnabled(false);
         btnGoogle.setEnabled(false);
-        btnFacebook.setEnabled(false);
-        btnTwitter.setEnabled(false);
+        btnSignupAction.setText("Creating Account...");
     }
 
     @Override
     public void hideLoading() {
-        // progressBar.setVisibility(View.GONE);
-        btnLogin.setEnabled(true);
+        btnSignupAction.setEnabled(true);
         btnGoogle.setEnabled(true);
-        btnFacebook.setEnabled(true);
-        btnTwitter.setEnabled(true);
+        btnSignupAction.setText(R.string.sign_up);
     }
 
     @Override
     public void showError(String message) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show();
+        AppSnack.showError(requireView(), message);
     }
 
     @Override
     public void showSuccess(String message) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
+        AppSnack.showSuccess(requireView(), message);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        presenter.detachView();
+        if (presenter != null) {
+            presenter.detachView();
+        }
     }
 }

@@ -1,12 +1,11 @@
-package com.aalaa.foodplanner.presentation.authentication.base;
+package com.aalaa.foodplanner.ui.authentication.base;
 
 import java.lang.ref.WeakReference;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
 
-
-public abstract class BasePresenter<V extends BaseView> {
+public abstract class BasePresenter<V> {
 
     private WeakReference<V> viewRef;
     protected final CompositeDisposable disposables = new CompositeDisposable();
@@ -28,7 +27,7 @@ public abstract class BasePresenter<V extends BaseView> {
     }
 
     protected boolean isViewAttached() {
-        return viewRef != null && viewRef.get() != null;
+        return getView() != null;
     }
 
     protected void addDisposable(Disposable disposable) {
