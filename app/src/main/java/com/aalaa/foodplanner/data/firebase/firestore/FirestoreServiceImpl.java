@@ -5,6 +5,7 @@ import com.aalaa.foodplanner.domain.auth.model.MealPlan;
 import com.aalaa.foodplanner.domain.auth.model.MealType;
 import com.aalaa.foodplanner.domain.auth.model.User;
 import com.aalaa.foodplanner.domain.auth.model.UserSettings;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -26,9 +27,12 @@ public class FirestoreServiceImpl implements FirestoreService {
     private static final String FIELD_UID = "uid";
     private static final String FIELD_EMAIL = "email";
     private static final String FIELD_DISPLAY_NAME = "displayName";
+    private static final String FIELD_PHOTO_URL = "photoUrl";
+
     private static final String FIELD_SETTINGS = "settings";
     private static final String FIELD_DARK_MODE = "darkMode";
     private static final String FIELD_LANGUAGE = "language";
+
     private static final String FIELD_FAVORITE_MEALS = "favoriteMeals";
     private static final String FIELD_CREATED_AT = "createdAt";
     private static final String FIELD_UPDATED_AT = "updatedAt";
@@ -51,7 +55,6 @@ public class FirestoreServiceImpl implements FirestoreService {
             userData.put(FIELD_UID, user.getUid());
             userData.put(FIELD_EMAIL, user.getEmail());
             userData.put(FIELD_DISPLAY_NAME, user.getDisplayName());
-            userData.put(FIELD_CREATED_AT, FieldValue.serverTimestamp());
             userData.put(FIELD_UPDATED_AT, FieldValue.serverTimestamp());
 
             Map<String, Object> settings = new HashMap<>();
@@ -63,7 +66,7 @@ public class FirestoreServiceImpl implements FirestoreService {
 
             firestore.collection(COLLECTION_USERS)
                     .document(user.getUid())
-                    .set(userData)
+                    .set(userData, SetOptions.merge())
                     .addOnSuccessListener(unused -> emitter.onComplete())
                     .addOnFailureListener(emitter::onError);
         });
@@ -76,13 +79,17 @@ public class FirestoreServiceImpl implements FirestoreService {
                     .document(userId)
                     .get()
                     .addOnSuccessListener(doc -> {
+                        if (emitter.isDisposed()) return;
+
                         if (doc.exists()) {
                             emitter.onSuccess(documentToUser(doc));
                         } else {
                             emitter.onError(new Exception("User not found"));
                         }
                     })
-                    .addOnFailureListener(emitter::onError);
+                    .addOnFailureListener(e -> {
+                        if (!emitter.isDisposed()) emitter.onError(e);
+                    });
         });
     }
 
@@ -90,14 +97,19 @@ public class FirestoreServiceImpl implements FirestoreService {
     public Completable updateUserProfile(String userId, String displayName, String photoUrl) {
         return Completable.create(emitter -> {
             Map<String, Object> updates = new HashMap<>();
-            updates.put(FIELD_DISPLAY_NAME, displayName);
+            if (displayName != null) updates.put(FIELD_DISPLAY_NAME, displayName);
+            if (photoUrl != null) updates.put(FIELD_PHOTO_URL, photoUrl);
             updates.put(FIELD_UPDATED_AT, FieldValue.serverTimestamp());
 
             firestore.collection(COLLECTION_USERS)
                     .document(userId)
-                    .update(updates)
-                    .addOnSuccessListener(unused -> emitter.onComplete())
-                    .addOnFailureListener(emitter::onError);
+                    .set(updates, SetOptions.merge())
+                    .addOnSuccessListener(unused -> {
+                        if (!emitter.isDisposed()) emitter.onComplete();
+                    })
+                    .addOnFailureListener(e -> {
+                        if (!emitter.isDisposed()) emitter.onError(e);
+                    });
         });
     }
 
@@ -107,8 +119,12 @@ public class FirestoreServiceImpl implements FirestoreService {
             firestore.collection(COLLECTION_USERS)
                     .document(userId)
                     .delete()
-                    .addOnSuccessListener(unused -> emitter.onComplete())
-                    .addOnFailureListener(emitter::onError);
+                    .addOnSuccessListener(unused -> {
+                        if (!emitter.isDisposed()) emitter.onComplete();
+                    })
+                    .addOnFailureListener(e -> {
+                        if (!emitter.isDisposed()) emitter.onError(e);
+                    });
         });
     }
 
@@ -119,6 +135,8 @@ public class FirestoreServiceImpl implements FirestoreService {
                     .document(userId)
                     .get()
                     .addOnSuccessListener(doc -> {
+                        if (emitter.isDisposed()) return;
+
                         if (doc.exists()) {
                             @SuppressWarnings("unchecked")
                             Map<String, Object> settingsMap = (Map<String, Object>) doc.get(FIELD_SETTINGS);
@@ -127,7 +145,9 @@ public class FirestoreServiceImpl implements FirestoreService {
                             emitter.onSuccess(new UserSettings());
                         }
                     })
-                    .addOnFailureListener(emitter::onError);
+                    .addOnFailureListener(e -> {
+                        if (!emitter.isDisposed()) emitter.onError(e);
+                    });
         });
     }
 
@@ -144,9 +164,13 @@ public class FirestoreServiceImpl implements FirestoreService {
 
             firestore.collection(COLLECTION_USERS)
                     .document(userId)
-                    .update(updates)
-                    .addOnSuccessListener(unused -> emitter.onComplete())
-                    .addOnFailureListener(emitter::onError);
+                    .set(updates, SetOptions.merge())
+                    .addOnSuccessListener(unused -> {
+                        if (!emitter.isDisposed()) emitter.onComplete();
+                    })
+                    .addOnFailureListener(e -> {
+                        if (!emitter.isDisposed()) emitter.onError(e);
+                    });
         });
     }
 
@@ -157,6 +181,8 @@ public class FirestoreServiceImpl implements FirestoreService {
                     .document(userId)
                     .get()
                     .addOnSuccessListener(doc -> {
+                        if (emitter.isDisposed()) return;
+
                         if (doc.exists()) {
                             @SuppressWarnings("unchecked")
                             List<String> favorites = (List<String>) doc.get(FIELD_FAVORITE_MEALS);
@@ -165,7 +191,9 @@ public class FirestoreServiceImpl implements FirestoreService {
                             emitter.onSuccess(new ArrayList<>());
                         }
                     })
-                    .addOnFailureListener(emitter::onError);
+                    .addOnFailureListener(e -> {
+                        if (!emitter.isDisposed()) emitter.onError(e);
+                    });
         });
     }
 
@@ -178,8 +206,12 @@ public class FirestoreServiceImpl implements FirestoreService {
                             FIELD_FAVORITE_MEALS, FieldValue.arrayUnion(mealId),
                             FIELD_UPDATED_AT, FieldValue.serverTimestamp()
                     )
-                    .addOnSuccessListener(unused -> emitter.onComplete())
-                    .addOnFailureListener(emitter::onError);
+                    .addOnSuccessListener(unused -> {
+                        if (!emitter.isDisposed()) emitter.onComplete();
+                    })
+                    .addOnFailureListener(e -> {
+                        if (!emitter.isDisposed()) emitter.onError(e);
+                    });
         });
     }
 
@@ -192,8 +224,12 @@ public class FirestoreServiceImpl implements FirestoreService {
                             FIELD_FAVORITE_MEALS, FieldValue.arrayRemove(mealId),
                             FIELD_UPDATED_AT, FieldValue.serverTimestamp()
                     )
-                    .addOnSuccessListener(unused -> emitter.onComplete())
-                    .addOnFailureListener(emitter::onError);
+                    .addOnSuccessListener(unused -> {
+                        if (!emitter.isDisposed()) emitter.onComplete();
+                    })
+                    .addOnFailureListener(e -> {
+                        if (!emitter.isDisposed()) emitter.onError(e);
+                    });
         });
     }
 
@@ -206,9 +242,13 @@ public class FirestoreServiceImpl implements FirestoreService {
 
             firestore.collection(COLLECTION_USERS)
                     .document(userId)
-                    .update(updates)
-                    .addOnSuccessListener(unused -> emitter.onComplete())
-                    .addOnFailureListener(emitter::onError);
+                    .set(updates, SetOptions.merge())
+                    .addOnSuccessListener(unused -> {
+                        if (!emitter.isDisposed()) emitter.onComplete();
+                    })
+                    .addOnFailureListener(e -> {
+                        if (!emitter.isDisposed()) emitter.onError(e);
+                    });
         });
     }
 
@@ -220,6 +260,8 @@ public class FirestoreServiceImpl implements FirestoreService {
                     .collection(SUBCOLLECTION_MEAL_PLANS)
                     .get()
                     .addOnSuccessListener(querySnapshot -> {
+                        if (emitter.isDisposed()) return;
+
                         Map<String, DayMeals> days = new HashMap<>();
 
                         for (DocumentSnapshot doc : querySnapshot.getDocuments()) {
@@ -232,7 +274,9 @@ public class FirestoreServiceImpl implements FirestoreService {
 
                         emitter.onSuccess(new MealPlan(days));
                     })
-                    .addOnFailureListener(emitter::onError);
+                    .addOnFailureListener(e -> {
+                        if (!emitter.isDisposed()) emitter.onError(e);
+                    });
         });
     }
 
@@ -245,13 +289,17 @@ public class FirestoreServiceImpl implements FirestoreService {
                     .document(date)
                     .get()
                     .addOnSuccessListener(doc -> {
+                        if (emitter.isDisposed()) return;
+
                         if (doc.exists()) {
                             emitter.onSuccess(documentToDayMeals(doc));
                         } else {
                             emitter.onSuccess(new DayMeals());
                         }
                     })
-                    .addOnFailureListener(emitter::onError);
+                    .addOnFailureListener(e -> {
+                        if (!emitter.isDisposed()) emitter.onError(e);
+                    });
         });
     }
 
@@ -270,8 +318,12 @@ public class FirestoreServiceImpl implements FirestoreService {
                     .collection(SUBCOLLECTION_MEAL_PLANS)
                     .document(date)
                     .set(data)
-                    .addOnSuccessListener(unused -> emitter.onComplete())
-                    .addOnFailureListener(emitter::onError);
+                    .addOnSuccessListener(unused -> {
+                        if (!emitter.isDisposed()) emitter.onComplete();
+                    })
+                    .addOnFailureListener(e -> {
+                        if (!emitter.isDisposed()) emitter.onError(e);
+                    });
         });
     }
 
@@ -283,8 +335,12 @@ public class FirestoreServiceImpl implements FirestoreService {
                     .collection(SUBCOLLECTION_MEAL_PLANS)
                     .document(date)
                     .delete()
-                    .addOnSuccessListener(unused -> emitter.onComplete())
-                    .addOnFailureListener(emitter::onError);
+                    .addOnSuccessListener(unused -> {
+                        if (!emitter.isDisposed()) emitter.onComplete();
+                    })
+                    .addOnFailureListener(e -> {
+                        if (!emitter.isDisposed()) emitter.onError(e);
+                    });
         });
     }
 
@@ -300,8 +356,12 @@ public class FirestoreServiceImpl implements FirestoreService {
                     .collection(SUBCOLLECTION_MEAL_PLANS)
                     .document(date)
                     .set(data, SetOptions.merge())
-                    .addOnSuccessListener(unused -> emitter.onComplete())
-                    .addOnFailureListener(emitter::onError);
+                    .addOnSuccessListener(unused -> {
+                        if (!emitter.isDisposed()) emitter.onComplete();
+                    })
+                    .addOnFailureListener(e -> {
+                        if (!emitter.isDisposed()) emitter.onError(e);
+                    });
         });
     }
 
@@ -316,11 +376,11 @@ public class FirestoreServiceImpl implements FirestoreService {
                     .document(userId)
                     .collection(SUBCOLLECTION_MEAL_PLANS)
                     .document(date)
-                    .update(updates)
-                    .addOnSuccessListener(unused -> {
-                        checkAndDeleteEmptyDay(userId, date, emitter);
-                    })
-                    .addOnFailureListener(emitter::onError);
+                    .set(updates, SetOptions.merge())
+                    .addOnSuccessListener(unused -> checkAndDeleteEmptyDay(userId, date, emitter))
+                    .addOnFailureListener(e -> {
+                        if (!emitter.isDisposed()) emitter.onError(e);
+                    });
         });
     }
 
@@ -331,12 +391,18 @@ public class FirestoreServiceImpl implements FirestoreService {
                 .document(date)
                 .get()
                 .addOnSuccessListener(doc -> {
+                    if (emitter.isDisposed()) return;
+
                     if (doc.exists()) {
                         DayMeals dayMeals = documentToDayMeals(doc);
                         if (dayMeals.isEmpty()) {
                             doc.getReference().delete()
-                                    .addOnSuccessListener(unused -> emitter.onComplete())
-                                    .addOnFailureListener(e -> emitter.onComplete());
+                                    .addOnSuccessListener(unused -> {
+                                        if (!emitter.isDisposed()) emitter.onComplete();
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        if (!emitter.isDisposed()) emitter.onComplete();
+                                    });
                         } else {
                             emitter.onComplete();
                         }
@@ -344,10 +410,12 @@ public class FirestoreServiceImpl implements FirestoreService {
                         emitter.onComplete();
                     }
                 })
-                .addOnFailureListener(e -> emitter.onComplete());
+                .addOnFailureListener(e -> {
+                    if (!emitter.isDisposed()) emitter.onComplete();
+                });
     }
 
-
+    @SuppressWarnings("unchecked")
     private User documentToUser(DocumentSnapshot doc) {
         Map<String, Object> settingsMap = (Map<String, Object>) doc.get(FIELD_SETTINGS);
         List<String> favorites = (List<String>) doc.get(FIELD_FAVORITE_MEALS);
@@ -362,9 +430,7 @@ public class FirestoreServiceImpl implements FirestoreService {
     }
 
     private UserSettings mapToUserSettings(Map<String, Object> map) {
-        if (map == null) {
-            return new UserSettings();
-        }
+        if (map == null) return new UserSettings();
 
         boolean darkMode = Boolean.TRUE.equals(map.get(FIELD_DARK_MODE));
         String language = map.get(FIELD_LANGUAGE) != null ? (String) map.get(FIELD_LANGUAGE) : "en";
@@ -383,18 +449,10 @@ public class FirestoreServiceImpl implements FirestoreService {
 
     private Map<String, Object> dayMealsToMap(DayMeals dayMeals) {
         Map<String, Object> map = new HashMap<>();
-        if (dayMeals.getBreakfast() != null) {
-            map.put(FIELD_BREAKFAST, dayMeals.getBreakfast());
-        }
-        if (dayMeals.getLunch() != null) {
-            map.put(FIELD_LUNCH, dayMeals.getLunch());
-        }
-        if (dayMeals.getDinner() != null) {
-            map.put(FIELD_DINNER, dayMeals.getDinner());
-        }
-        if (dayMeals.getSnack() != null) {
-            map.put(FIELD_SNACK, dayMeals.getSnack());
-        }
+        if (dayMeals.getBreakfast() != null) map.put(FIELD_BREAKFAST, dayMeals.getBreakfast());
+        if (dayMeals.getLunch() != null) map.put(FIELD_LUNCH, dayMeals.getLunch());
+        if (dayMeals.getDinner() != null) map.put(FIELD_DINNER, dayMeals.getDinner());
+        if (dayMeals.getSnack() != null) map.put(FIELD_SNACK, dayMeals.getSnack());
         return map;
     }
 }
