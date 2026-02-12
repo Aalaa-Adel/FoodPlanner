@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="110dp"
-    android:paddingTop="50dp"
+    android:paddingTop="20dp"
     android:background="@color/page_background">
 
     <TextView

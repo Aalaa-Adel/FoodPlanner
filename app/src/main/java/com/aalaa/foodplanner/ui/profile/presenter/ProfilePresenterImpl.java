@@ -115,15 +115,8 @@ public class ProfilePresenterImpl implements ProfilePresenter {
             return;
         }
 
-        // We might want to allow force restore even if already restored?
-        // For now, let's just check connectivity.
-        // SyncPolicy.shouldRunRestore checks 'didRestore' flag too.
-        // But user explicitly clicked 'Restore', so maybe we should override the flag
-        // check?
-        // Let's stick to connectivity check for manual trigger, or minimal check.
 
-        if (!syncPolicy.shouldRunBackup()) { // using backup check for generic connectivity for now as
-                                             // SyncPolicy.shouldRunRestore is strict on 'once'
+        if (!syncPolicy.shouldRunBackup()) {
             v.showRestoreError("You are offline. Cannot restore now.");
             return;
         }
@@ -139,7 +132,6 @@ public class ProfilePresenterImpl implements ProfilePresenter {
                             ProfileView vv = view();
                             if (vv == null)
                                 return;
-                            // Mark as restored
                             sessionManager.setRestored(user.getUid());
 
                             vv.hideLoading();
@@ -169,7 +161,7 @@ public class ProfilePresenterImpl implements ProfilePresenter {
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if (user == null) {
-            sessionManager.clearGuest(); // Ensure guest is cleared
+            sessionManager.clearGuest();
             v.navigateToLogin();
             return;
         }
@@ -193,7 +185,7 @@ public class ProfilePresenterImpl implements ProfilePresenter {
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
                             () -> {
-                                sessionManager.clearGuest(); // Clear guest flag
+                                sessionManager.clearGuest();
                                 finishLogout("Logout (sync) successful");
                             },
                             throwable -> {
@@ -211,12 +203,12 @@ public class ProfilePresenterImpl implements ProfilePresenter {
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
                             () -> {
-                                sessionManager.clearGuest(); // Clear guest flag
+                                sessionManager.clearGuest();
                                 finishLogout("Logout (no sync) successful");
                             },
                             throwable -> {
                                 Log.e(TAG, "Logout (no sync) clearLocal failed", throwable);
-                                sessionManager.clearGuest(); // Force clear anyway structure
+                                sessionManager.clearGuest();
                                 finishLogout("Logout completed, but local clear had issues.");
                             });
         }

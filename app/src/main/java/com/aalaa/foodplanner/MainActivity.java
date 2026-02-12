@@ -75,12 +75,25 @@ public class MainActivity extends AppCompatActivity {
 
         setupSyncObserver();
 
-        String target = getIntent().getStringExtra("TARGET_DEST");
-        if ("AUTH".equals(target)) {
-            navController.navigate(R.id.action_splash_to_auth);
-        } else if ("HOME".equals(target)) {
-            navController.navigate(R.id.action_splash_to_main);
+        if (savedInstanceState == null) {
+            String target = getIntent().getStringExtra("TARGET_DEST");
+
+            if ("AUTH".equals(target)) {
+                navController.navigate(R.id.auth_graph, null,
+                        new androidx.navigation.NavOptions.Builder()
+                                .setPopUpTo(R.id.root_graph, true)
+                                .build());
+            } else if ("HOME".equals(target)) {
+                navController.navigate(R.id.main_graph, null,
+                        new androidx.navigation.NavOptions.Builder()
+                                .setPopUpTo(R.id.root_graph, true)
+                                .build());
+            }
+
+            getIntent().removeExtra("TARGET_DEST");
         }
+
+
     }
 
     private void setupSyncObserver() {

@@ -33,30 +33,31 @@ public class AppSnack {
 
         boolean isDark = isDarkMode(view);
 
-        int bg = ContextCompat.getColor(view.getContext(), isDark ? R.color.card_dark : R.color.card_light);
+       // int bg = ContextCompat.getColor(view.getContext(), isDark ? R.color.colorError : R.color.card_light);
         int text = ContextCompat.getColor(view.getContext(), isDark ? R.color.text_primary_dark : R.color.text_primary_light);
         int accent = ContextCompat.getColor(view.getContext(), R.color.accent_color);
 
         int strokeColor;
         int iconRes;
-
+        GradientDrawable shape = new GradientDrawable();
         switch (type) {
             case SUCCESS:
                 strokeColor = ContextCompat.getColor(view.getContext(), R.color.colorSuccess);
                 iconRes = android.R.drawable.checkbox_on_background;
+                shape.setColor(ContextCompat.getColor(view.getContext(),R.color.colorSuccess));
                 break;
             case ERROR:
                 strokeColor = ContextCompat.getColor(view.getContext(), R.color.colorError);
                 iconRes = android.R.drawable.ic_delete;
+                shape.setColor(ContextCompat.getColor(view.getContext(),R.color.colorError));
                 break;
             default:
                 strokeColor = accent;
                 iconRes = android.R.drawable.ic_dialog_info;
+                shape.setColor(ContextCompat.getColor(view.getContext(),R.color.accent_dark));
                 break;
         }
 
-        GradientDrawable shape = new GradientDrawable();
-        shape.setColor(bg);
         shape.setCornerRadius(dp(view, 14));
         shape.setStroke((int) dp(view, 1.2f), strokeColor);
         sbView.setBackground(shape);
