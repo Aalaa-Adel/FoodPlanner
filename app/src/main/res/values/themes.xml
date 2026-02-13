@@ -15,9 +15,12 @@
     </style>
 
     <style name="Theme.FoodPlanner.Splash" parent="Theme.FoodPlanner">
+        <item name="android:windowBackground">@drawable/bg_splash</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:statusBarColor">@color/splash_start</item>
         <item name="android:navigationBarColor">@color/splash_end</item>
+<!--        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="s">@drawable/logo</item>-->
+        <item name="android:windowSplashScreenBackground" tools:targetApi="s">@color/splash_start</item>
     </style>
 
 </resources>
