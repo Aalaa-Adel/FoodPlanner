@@ -131,6 +131,7 @@
     <string name="heat_olive_oil_in_a_large_pan_over_medium_heat">Heat olive oil in a large pan over medium heat.</string>
     <string name="profile">Profile</string>
     <string name="hi_chef">Hi,Chef </string>
+    <string name="you_are_currently_offline">You are currently offline</string>
 
 
 </resources>
