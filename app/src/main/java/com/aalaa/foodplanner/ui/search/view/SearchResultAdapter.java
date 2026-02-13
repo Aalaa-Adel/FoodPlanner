@@ -1,5 +1,6 @@
 package com.aalaa.foodplanner.ui.search.view;
 
+import android.app.Application;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aalaa.foodplanner.R;
+import com.aalaa.foodplanner.data.repository.FavoritesRepositoryImpl;
 import com.aalaa.foodplanner.domain.models.MealsItem;
 import com.bumptech.glide.Glide;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +59,21 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
                 clickListener.onMealClick(meal);
             }
         });
+
+        FavoritesRepositoryImpl.getInstance((Application) context.getApplicationContext())
+                .isFavorite(meal.getIdMeal())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(isFav -> {
+                    holder.btnBookmark.setImageResource(isFav ? R.drawable.ic_bookmark : R.drawable.ic_bookmark);
+                }, error -> {
+                });
+
+        holder.btnBookmark.setOnClickListener(v -> {
+            if (clickListener != null) {
+                clickListener.onBookmarkClick(meal);
+            }
+        });
     }
 
     @Override
@@ -70,11 +89,13 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
     static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView ivMealImage;
         TextView tvMealName;
+        ImageView btnBookmark;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             ivMealImage = itemView.findViewById(R.id.meal_image);
             tvMealName = itemView.findViewById(R.id.tv_meal_name);
+            btnBookmark = itemView.findViewById(R.id.btn_bookmark);
         }
     }
 }

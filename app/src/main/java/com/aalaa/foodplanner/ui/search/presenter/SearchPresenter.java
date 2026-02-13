@@ -1,5 +1,7 @@
 package com.aalaa.foodplanner.ui.search.presenter;
 
+import com.aalaa.foodplanner.domain.models.MealsItem;
+
 public interface SearchPresenter {
 
     void loadCategories();
@@ -7,7 +9,6 @@ public interface SearchPresenter {
     void loadAreas();
 
     void loadIngredients();
-
 
     void searchCategories(String query);
 
@@ -22,4 +23,8 @@ public interface SearchPresenter {
     void getMealsByIngredient(String ingredient);
 
     void dispose();
+
+    void addToFavorites(MealsItem meal);
+
+    void removeFromFavorites(MealsItem meal);
 }

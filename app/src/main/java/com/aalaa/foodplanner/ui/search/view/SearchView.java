@@ -7,7 +7,7 @@ import com.aalaa.foodplanner.domain.models.MealsItem;
 
 import java.util.List;
 
-public interface  SearchView {
+public interface SearchView {
     void showCategories(List<Category> categories);
 
     void showAreas(List<Area> areas);
@@ -25,4 +25,8 @@ public interface  SearchView {
     void showError(String message);
 
     void showEmptyState(String message);
+
+    void showAddedToFavorites();
+
+    void showRemovedFromFavorites();
 }

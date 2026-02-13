@@ -36,9 +36,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import com.aalaa.foodplanner.data.network.ConnectivityObserver;
+import com.aalaa.foodplanner.data.repository.FavoritesRepositoryImpl;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.subjects.PublishSubject;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class SearchFragment extends Fragment implements SearchView, OnSearchMealClickListener {
 
@@ -53,10 +57,15 @@ public class SearchFragment extends Fragment implements SearchView, OnSearchMeal
     private ProgressBar progressBar;
     private LinearLayout layoutEmptyState;
     private TextView tvEmptyMessage;
+    private LinearLayout offlineView;
+    private View contentView;
+    private Disposable networkDisposable;
 
     private SearchPresenter presenter;
+    private FavoritesRepositoryImpl favoritesRepository;
     private final CompositeDisposable disposables = new CompositeDisposable();
     private final PublishSubject<String> searchSubject = PublishSubject.create();
+    private com.aalaa.foodplanner.data.network.ConnectivityObserver connectivityObserver;
 
     private ExploreCategoryAdapter categoriesAdapter, countriesAdapter, ingredientsAdapter;
     private SearchResultAdapter searchResultsAdapter;
@@ -79,12 +88,38 @@ public class SearchFragment extends Fragment implements SearchView, OnSearchMeal
         setupPresenter();
         setupAdapters();
 
-        setupTabs();
         setupRxSearch();
+        setupTabs();
+
+        observeNetwork();
 
         presenter.loadCategories();
         presenter.loadAreas();
         presenter.loadIngredients();
+
+        favoritesRepository = FavoritesRepositoryImpl.getInstance(requireActivity().getApplication());
+    }
+
+    private void observeNetwork() {
+
+        connectivityObserver = com.aalaa.foodplanner.data.network.ConnectivityObserver.getInstance(requireContext());
+        connectivityObserver.startListening();
+        networkDisposable = connectivityObserver.observeNetwork()
+                .observeOn(io.reactivex.rxjava3.android.schedulers.AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(isConnected -> {
+                    if (isConnected) {
+                        offlineView.setVisibility(View.GONE);
+                        contentView.setVisibility(View.VISIBLE);
+                        if (etSearch.getText().toString().isEmpty()) {
+                            showTab(currentTab);
+                        }
+                    } else {
+                        offlineView.setVisibility(View.VISIBLE);
+                        contentView.setVisibility(View.GONE);
+                    }
+                }, error -> showError(error.getMessage()));
     }
 
     private void initViews(View view) {
@@ -99,10 +134,14 @@ public class SearchFragment extends Fragment implements SearchView, OnSearchMeal
         progressBar = view.findViewById(R.id.progress_bar);
         layoutEmptyState = view.findViewById(R.id.layout_empty_state);
         tvEmptyMessage = view.findViewById(R.id.tv_empty_message);
+        offlineView = view.findViewById(R.id.offline_view);
+        contentView = view.findViewById(R.id.content_view);
     }
 
     private void setupPresenter() {
-        presenter = new SearchPresenterImpl(this, MealRepositoryImpl.getInstance(MealRemoteDataSource.getInstance()));
+        presenter = new SearchPresenterImpl(this,
+                MealRepositoryImpl.getInstance(MealRemoteDataSource.getInstance()),
+                FavoritesRepositoryImpl.getInstance(requireActivity().getApplication()));
     }
 
     private void setupAdapters() {
@@ -217,6 +256,21 @@ public class SearchFragment extends Fragment implements SearchView, OnSearchMeal
     }
 
     @Override
+    public void onBookmarkClick(MealsItem meal) {
+        FavoritesRepositoryImpl.getInstance(requireActivity().getApplication())
+                .isFavorite(meal.getIdMeal())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(isFav -> {
+                    if (isFav) {
+                        presenter.removeFromFavorites(meal);
+                    } else {
+                        presenter.addToFavorites(meal);
+                    }
+                }, error -> showError(error.getMessage()));
+    }
+
+    @Override
     public void showCategories(List<Category> categories) {
         List<ExploreCategoryAdapter.ExploreItem> items = new ArrayList<>();
         for (Category cat : categories) {
@@ -317,9 +371,23 @@ public class SearchFragment extends Fragment implements SearchView, OnSearchMeal
     }
 
     @Override
+    public void showAddedToFavorites() {
+        AppSnack.showSuccess(requireView(), "Added to Favorites ❤️");
+    }
+
+    @Override
+    public void showRemovedFromFavorites() {
+        AppSnack.showInfo(requireView(), "Removed from Favorites");
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         disposables.clear();
+        if (networkDisposable != null && !networkDisposable.isDisposed()) {
+            networkDisposable.dispose();
+        }
+        ConnectivityObserver.getInstance(requireContext()).stopListening();
         if (presenter != null) {
             presenter.dispose();
         }

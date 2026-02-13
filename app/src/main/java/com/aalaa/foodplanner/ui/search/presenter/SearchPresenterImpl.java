@@ -10,6 +10,7 @@ import com.aalaa.foodplanner.domain.models.MealSpecification;
 import com.aalaa.foodplanner.domain.models.MealsItem;
 import com.aalaa.foodplanner.ui.search.view.ExploreCategoryAdapter;
 import com.aalaa.foodplanner.ui.search.view.SearchView;
+import com.aalaa.foodplanner.data.repository.FavoritesRepositoryImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,15 +25,18 @@ public class SearchPresenterImpl implements SearchPresenter {
 
     private final SearchView view;
     private final MealRepository repository;
+    private final FavoritesRepositoryImpl favoritesRepository;
     private final CompositeDisposable disposables;
 
     private List<Category> allCategories = new ArrayList<>();
     private List<Area> allAreas = new ArrayList<>();
     private List<Ingredients> allIngredients = new ArrayList<>();
 
-    public SearchPresenterImpl(SearchView view, MealRepository repository) {
+    public SearchPresenterImpl(SearchView view, MealRepository repository,
+            FavoritesRepositoryImpl favoritesRepository) {
         this.view = view;
         this.repository = repository;
+        this.favoritesRepository = favoritesRepository;
         this.disposables = new CompositeDisposable();
     }
 
@@ -246,6 +250,26 @@ public class SearchPresenterImpl implements SearchPresenter {
             }
         }
         return meals;
+    }
+
+    @Override
+    public void addToFavorites(MealsItem meal) {
+        disposables.add(favoritesRepository.addToFavorites(meal)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        () -> view.showAddedToFavorites(),
+                        error -> view.showError(error.getMessage())));
+    }
+
+    @Override
+    public void removeFromFavorites(MealsItem meal) {
+        disposables.add(favoritesRepository.removeFromFavorites(meal)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        () -> view.showRemovedFromFavorites(),
+                        error -> view.showError(error.getMessage())));
     }
 
     @Override

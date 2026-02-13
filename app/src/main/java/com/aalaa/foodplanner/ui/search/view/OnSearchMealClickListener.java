@@ -4,4 +4,6 @@ import com.aalaa.foodplanner.domain.models.MealsItem;
 
 public interface OnSearchMealClickListener {
     void onMealClick(MealsItem meal);
+
+    void onBookmarkClick(MealsItem meal);
 }
