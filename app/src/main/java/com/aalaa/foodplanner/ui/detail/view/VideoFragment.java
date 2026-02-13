@@ -30,12 +30,13 @@ public class VideoFragment extends Fragment {
 
     private String currentVideoId;
     private boolean isPlayerReady = false;
+    private boolean pendingPlay = false;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
-                             @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+            @Nullable ViewGroup container,
+            @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_video, container, false);
 
@@ -57,8 +58,21 @@ public class VideoFragment extends Fragment {
         youtubePlayerView.initialize(new AbstractYouTubePlayerListener() {
             @Override
             public void onReady(@NonNull YouTubePlayer youTubePlayer) {
+                android.util.Log.d("VideoFragment", "YouTube player ready");
                 activePlayer = youTubePlayer;
                 isPlayerReady = true;
+                if (pendingPlay && currentVideoId != null) {
+                    android.util.Log.d("VideoFragment", "Executing pending play for ID: " + currentVideoId);
+                    activePlayer.loadVideo(currentVideoId, 0f);
+                    pendingPlay = false;
+                }
+            }
+
+            @Override
+            public void onError(@NonNull YouTubePlayer youTubePlayer,
+                    @NonNull com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants.PlayerError error) {
+                android.util.Log.e("VideoFragment", "YouTube player error: " + error.name());
+                isPlayerReady = false;
             }
         }, options);
 
@@ -73,16 +87,19 @@ public class VideoFragment extends Fragment {
         Fragment parent = getParentFragment();
         if (parent instanceof RecipeDetailFragment) {
             MealsItem meal = ((RecipeDetailFragment) parent).getCurrentMeal();
-            if (meal != null) updateVideo(meal);
+            if (meal != null)
+                updateVideo(meal);
         }
     }
 
     public void updateVideo(MealsItem meal) {
-        if (meal == null) return;
+        if (meal == null)
+            return;
 
         String name = meal.getStrMeal();
         if (tvVideoDescription != null) {
-            tvVideoDescription.setText("Watch the complete step-by-step cooking tutorial for " + (name != null ? name : "this recipe"));
+            tvVideoDescription.setText(
+                    "Watch the complete step-by-step cooking tutorial for " + (name != null ? name : "this recipe"));
         }
 
         String thumb = meal.getStrMealThumb();
@@ -93,14 +110,16 @@ public class VideoFragment extends Fragment {
         String youtubeUrl = meal.getStrYoutube();
         if (youtubeUrl == null || youtubeUrl.trim().isEmpty()) {
             hideAllVideoUI();
-            if (tvVideoDescription != null) tvVideoDescription.setText("No video tutorial available for this recipe.");
+            if (tvVideoDescription != null)
+                tvVideoDescription.setText("No video tutorial available for this recipe.");
             return;
         }
 
         currentVideoId = extractYouTubeId(youtubeUrl);
         if (currentVideoId == null) {
             hideAllVideoUI();
-            if (tvVideoDescription != null) tvVideoDescription.setText("No valid video found for this recipe.");
+            if (tvVideoDescription != null)
+                tvVideoDescription.setText("No valid video found for this recipe.");
             return;
         }
 
@@ -108,14 +127,21 @@ public class VideoFragment extends Fragment {
     }
 
     private void playVideoWithSound() {
-        if (currentVideoId == null) return;
+        if (currentVideoId == null) {
+            android.util.Log.w("VideoFragment", "playVideoWithSound called but currentVideoId is null");
+            return;
+        }
 
         youtubePlayerView.setVisibility(View.VISIBLE);
         ivThumb.setVisibility(View.GONE);
         btnPlayOverlay.setVisibility(View.GONE);
 
         if (isPlayerReady && activePlayer != null) {
+            android.util.Log.d("VideoFragment", "Playing video immediately: " + currentVideoId);
             activePlayer.loadVideo(currentVideoId, 0f);
+        } else {
+            android.util.Log.d("VideoFragment", "Player not ready, setting pendingPlay flag");
+            pendingPlay = true;
         }
     }
 
@@ -132,22 +158,44 @@ public class VideoFragment extends Fragment {
     }
 
     private String extractYouTubeId(String url) {
-        String pattern = "(?:youtube\\.com.*(?:\\?|&)v=|youtu\\.be/)([a-zA-Z0-9_-]{11})";
+        if (url == null || url.trim().isEmpty())
+            return null;
+
+        // Comprehensive regex for various YouTube URL patterns:
+        // - standard: youtube.com/watch?v=ID
+        // - shortened: youtu.be/ID
+        // - embed: youtube.com/embed/ID
+        // - shorts: youtube.com/shorts/ID
+        // - direct ID (11 chars)
+        String pattern = "(?:https?:\\/\\/)?(?:www\\.)?(?:youtube\\.com\\/(?:[^\\/\\n\\s]+\\/\\S+\\/|(?:v|e(?:mbed)?)\\/|\\S*?[?&]v=|shorts\\/)|youtu\\.be\\/)([a-zA-Z0-9_-]{11})";
+
         java.util.regex.Pattern compiledPattern = java.util.regex.Pattern.compile(pattern);
         java.util.regex.Matcher matcher = compiledPattern.matcher(url);
-        return matcher.find() ? matcher.group(1) : null;
+
+        if (matcher.find()) {
+            return matcher.group(1);
+        }
+
+        // Fallback for just the ID if the full URL wasn't matched but looks like an ID
+        if (url.length() == 11 && url.matches("[a-zA-Z0-9_-]{11}")) {
+            return url;
+        }
+
+        return null;
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        if (activePlayer != null) activePlayer.pause();
+        if (activePlayer != null)
+            activePlayer.pause();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (youtubePlayerView != null) youtubePlayerView.release();
+        if (youtubePlayerView != null)
+            youtubePlayerView.release();
         activePlayer = null;
         isPlayerReady = false;
     }
