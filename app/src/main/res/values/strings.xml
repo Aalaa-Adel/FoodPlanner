@@ -132,6 +132,7 @@
     <string name="profile">Profile</string>
     <string name="hi_chef">Hi,Chef </string>
     <string name="you_are_currently_offline">You are currently offline</string>
+    <string name="recipes">Recipes</string>
 
 
 </resources>
