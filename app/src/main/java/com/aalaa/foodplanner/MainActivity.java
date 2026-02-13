@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
         disposables.add(
                 connectivityObserver.observeNetwork()
                         .distinctUntilChanged()
-                        .filter(isConnected -> isConnected) // Only when coming online
+                        .filter(isConnected -> isConnected)
                         .switchMapCompletable(isConnected -> syncRepo.processPendingActions())
                         .subscribeOn(io.reactivex.rxjava3.schedulers.Schedulers.io())
                         .observeOn(io.reactivex.rxjava3.android.schedulers.AndroidSchedulers.mainThread())

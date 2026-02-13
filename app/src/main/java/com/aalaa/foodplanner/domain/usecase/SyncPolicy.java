@@ -13,13 +13,6 @@ public class SyncPolicy {
         this.connectivityObserver = connectivityObserver;
     }
 
-    /**
-     * Determines if a data restore should be attempted.
-     * 
-     * @param uid The current user's UID.
-     * @return true if the user is online AND has not restored data on this device
-     *         yet.
-     */
     public boolean shouldRunRestore(String uid) {
         if (uid == null)
             return false;
@@ -28,12 +21,6 @@ public class SyncPolicy {
         return isOnline && shouldRestore;
     }
 
-    /**
-     * Determines if a backup should be attempted.
-     * This is a simple check for online status, but could be expanded.
-     * 
-     * @return true if online.
-     */
     public boolean shouldRunBackup() {
         return connectivityObserver.isConnected();
     }

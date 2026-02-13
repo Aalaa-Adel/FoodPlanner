@@ -33,7 +33,7 @@ public class ConnectivityObserver {
 
     public void startListening() {
         if (networkCallback != null)
-            return; // Already listening
+            return;
 
         NetworkRequest networkRequest = new NetworkRequest.Builder()
                 .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
@@ -59,7 +59,6 @@ public class ConnectivityObserver {
             try {
                 connectivityManager.unregisterNetworkCallback(networkCallback);
             } catch (Exception e) {
-                // Already unregistered or not registered
             }
             networkCallback = null;
         }
