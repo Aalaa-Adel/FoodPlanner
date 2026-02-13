@@ -12,49 +12,54 @@ import com.google.android.material.snackbar.Snackbar;
 public class AppSnack {
 
     public static void showSuccess(View view, String msg) {
-        show(view, msg, Type.SUCCESS);
+        show(view, msg, SNACK_SUCCESS);
     }
 
     public static void showError(View view, String msg) {
-        show(view, msg, Type.ERROR);
+        show(view, msg, SNACK_ERROR);
     }
 
     public static void showInfo(View view, String msg) {
-        show(view, msg, Type.INFO);
+        show(view, msg, SNACK_INFO);
     }
 
-    private enum Type { SUCCESS, ERROR, INFO }
+    private static final int SNACK_SUCCESS = 0;
+    private static final int SNACK_ERROR = 1;
+    private static final int SNACK_INFO = 2;
 
-    private static void show(View view, String message, Type type) {
-        if (view == null) return;
+    private static void show(View view, String message, int type) {
+        if (view == null)
+            return;
 
         Snackbar sb = Snackbar.make(view, message, Snackbar.LENGTH_LONG);
         View sbView = sb.getView();
 
-        boolean isDark = isDarkMode(view);
+        // Fix: Anchor to bottom navigation so it appears above it
+        View nav = view.getRootView().findViewById(R.id.bottomNav);
+        if (nav != null) {
+            sb.setAnchorView(nav);
+        }
 
-       // int bg = ContextCompat.getColor(view.getContext(), isDark ? R.color.colorError : R.color.card_light);
-        int text = ContextCompat.getColor(view.getContext(), isDark ? R.color.text_primary_dark : R.color.text_primary_light);
-        int accent = ContextCompat.getColor(view.getContext(), R.color.accent_color);
-
+        int text = ContextCompat.getColor(view.getContext(), android.R.color.white);
         int strokeColor;
         int iconRes;
         GradientDrawable shape = new GradientDrawable();
+
         switch (type) {
-            case SUCCESS:
+            case SNACK_SUCCESS:
                 strokeColor = ContextCompat.getColor(view.getContext(), R.color.colorSuccess);
                 iconRes = android.R.drawable.checkbox_on_background;
-                shape.setColor(ContextCompat.getColor(view.getContext(),R.color.colorSuccess));
+                shape.setColor(ContextCompat.getColor(view.getContext(), R.color.colorSuccess));
                 break;
-            case ERROR:
+            case SNACK_ERROR:
                 strokeColor = ContextCompat.getColor(view.getContext(), R.color.colorError);
                 iconRes = android.R.drawable.ic_delete;
-                shape.setColor(ContextCompat.getColor(view.getContext(),R.color.colorError));
+                shape.setColor(ContextCompat.getColor(view.getContext(), R.color.colorError));
                 break;
             default:
-                strokeColor = accent;
+                strokeColor = ContextCompat.getColor(view.getContext(), R.color.accent_color);
                 iconRes = android.R.drawable.ic_dialog_info;
-                shape.setColor(ContextCompat.getColor(view.getContext(),R.color.accent_dark));
+                shape.setColor(ContextCompat.getColor(view.getContext(), R.color.accent_dark));
                 break;
         }
 
