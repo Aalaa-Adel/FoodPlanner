@@ -46,8 +46,7 @@ public class FavoritesRepositoryImpl implements FavoritesRepository {
                 "INSERT",
                 "FAV",
                 meal.getIdMeal(),
-                System.currentTimeMillis()
-        );
+                System.currentTimeMillis());
 
         return favoritesLocalDataSource.insertFavorite(entity)
                 .andThen(pendingActionDao.insert(action));
@@ -57,12 +56,11 @@ public class FavoritesRepositoryImpl implements FavoritesRepository {
     public Completable removeFromFavorites(MealsItem meal) {
         FavoriteMealEntity entity = new FavoriteMealEntity(meal);
         PendingAction action = new PendingAction(
-                "INSERT",
+                "DELETE",
                 "FAV",
                 meal.getIdMeal(),
-                System.currentTimeMillis()
-        );
-        return favoritesLocalDataSource.insertFavorite(entity)
+                System.currentTimeMillis());
+        return favoritesLocalDataSource.deleteFavorite(entity)
                 .andThen(pendingActionDao.insert(action));
     }
 

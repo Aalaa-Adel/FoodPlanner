@@ -93,11 +93,8 @@ public class MealsListingAdapter extends RecyclerView.Adapter<MealsListingAdapte
 
             if (meal.isFavorite()) {
                 btnBookmark.setImageResource(R.drawable.ic_heart_filled);
-                // set tint
-                btnBookmark.setColorFilter(itemView.getContext().getResources().getColor(R.color.accent_color));
             } else {
-                btnBookmark.setImageResource(R.drawable.ic_bookmark);
-                btnBookmark.setColorFilter(itemView.getContext().getResources().getColor(R.color.text_primary_light));
+                btnBookmark.setImageResource(R.drawable.ic_heart_outline);
             }
 
             btnBookmark.setOnClickListener(v -> {

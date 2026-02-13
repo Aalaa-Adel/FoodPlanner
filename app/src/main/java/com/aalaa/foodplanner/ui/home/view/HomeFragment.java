@@ -58,6 +58,11 @@ public class HomeFragment extends Fragment implements HomeView, FavView, OnHomeM
     private ProgressBar progressCountries;
     private ProgressBar progressMealOfDay;
 
+    private View offlineView;
+    private View contentView;
+    private io.reactivex.rxjava3.disposables.Disposable networkDisposable;
+    private com.aalaa.foodplanner.data.network.ConnectivityObserver connectivityObserver;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_home, container, false);
@@ -83,7 +88,29 @@ public class HomeFragment extends Fragment implements HomeView, FavView, OnHomeM
 
         presenter.getHomeData();
         bindUserInfo();
+        observeNetwork();
+    }
 
+    private void observeNetwork() {
+        connectivityObserver = com.aalaa.foodplanner.data.network.ConnectivityObserver.getInstance(requireContext());
+        connectivityObserver.startListening();
+        networkDisposable = connectivityObserver.observeNetwork()
+                .observeOn(io.reactivex.rxjava3.android.schedulers.AndroidSchedulers.mainThread())
+                .subscribe(isConnected -> {
+                    android.util.Log.d("HomeFragment", "Network status changed: " + isConnected);
+                    if (isConnected) {
+                        offlineView.setVisibility(View.GONE);
+                        contentView.setVisibility(View.VISIBLE);
+                        if (presenter != null) {
+                            presenter.getHomeData();
+                        }
+                    } else {
+                        offlineView.setVisibility(View.VISIBLE);
+                        contentView.setVisibility(View.GONE);
+                    }
+                }, throwable -> {
+                    android.util.Log.e("HomeFragment", "Error observing network", throwable);
+                });
     }
 
     private void initViews(View view) {
@@ -99,6 +126,8 @@ public class HomeFragment extends Fragment implements HomeView, FavView, OnHomeM
         progressMealOfDay = view.findViewById(R.id.progressMealOfDay);
         tvUserName = view.findViewById(R.id.tv_user_name);
 
+        offlineView = view.findViewById(R.id.offline_view);
+        contentView = view.findViewById(R.id.content_view);
 
         if (tvSeeAllCategories != null) {
             tvSeeAllCategories.setOnClickListener(
@@ -110,7 +139,6 @@ public class HomeFragment extends Fragment implements HomeView, FavView, OnHomeM
                     v -> Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_countriesFragment));
         }
     }
-
 
     private void bindUserInfo() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -146,7 +174,17 @@ public class HomeFragment extends Fragment implements HomeView, FavView, OnHomeM
 
     @Override
     public void onBookmarkClick(MealsItem meal, int position) {
-        favoritesPresenter.addToFavorites(meal);
+        com.aalaa.foodplanner.data.repository.FavoritesRepositoryImpl.getInstance(requireActivity().getApplication())
+                .isFavorite(meal.getIdMeal())
+                .subscribeOn(io.reactivex.rxjava3.schedulers.Schedulers.io())
+                .observeOn(io.reactivex.rxjava3.android.schedulers.AndroidSchedulers.mainThread())
+                .subscribe(isFav -> {
+                    if (isFav) {
+                        favoritesPresenter.removeFromFavorites(meal);
+                    } else {
+                        favoritesPresenter.addToFavorites(meal);
+                    }
+                }, error -> showError(error.getMessage()));
     }
 
     private void onCategoryClick(Category category) {
@@ -243,6 +281,10 @@ public class HomeFragment extends Fragment implements HomeView, FavView, OnHomeM
         if (favoritesPresenter != null) {
             favoritesPresenter.dispose();
         }
+        if (networkDisposable != null && !networkDisposable.isDisposed()) {
+            networkDisposable.dispose();
+        }
+        com.aalaa.foodplanner.data.network.ConnectivityObserver.getInstance(requireContext()).stopListening();
         super.onDestroyView();
     }
 }

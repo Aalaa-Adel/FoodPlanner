@@ -1,8 +1,11 @@
 package com.aalaa.foodplanner.ui.listing.presenter;
 
+import com.aalaa.foodplanner.data.repository.FavoritesRepositoryImpl;
 import com.aalaa.foodplanner.data.repository.MealRepositoryImpl;
 import com.aalaa.foodplanner.domain.models.MealCategoryResponse;
 import com.aalaa.foodplanner.domain.models.MealCountryResponse;
+import com.aalaa.foodplanner.domain.models.MealsItem;
+import com.aalaa.foodplanner.ui.common.AppSnack;
 import com.aalaa.foodplanner.ui.listing.view.MealsListingView;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -13,11 +16,14 @@ public class MealsListingPresenterImpl implements MealsListingPresenter {
 
     private final MealsListingView view;
     private final MealRepositoryImpl repository;
+    private final FavoritesRepositoryImpl favoritesRepository;
     private final CompositeDisposable disposable = new CompositeDisposable();
 
-    public MealsListingPresenterImpl(MealsListingView view, MealRepositoryImpl repository) {
+    public MealsListingPresenterImpl(MealsListingView view, MealRepositoryImpl repository,
+            FavoritesRepositoryImpl favoritesRepository) {
         this.view = view;
         this.repository = repository;
+        this.favoritesRepository = favoritesRepository;
     }
 
     @Override
@@ -79,11 +85,29 @@ public class MealsListingPresenterImpl implements MealsListingPresenter {
                             error -> {
                                 view.hideLoading();
                                 view.showError(error.getMessage() != null ? error.getMessage() : "Unknown error");
-                            }
-                    ));
+                            }));
         }
     }
 
+    @Override
+    public void addToFavorites(MealsItem meal) {
+        disposable.add(favoritesRepository.addToFavorites(meal)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(() -> {
+                    view.showAddedToFavorites();
+                }, this::handleError));
+    }
+
+    @Override
+    public void removeFromFavorites(MealsItem meal) {
+        disposable.add(favoritesRepository.removeFromFavorites(meal)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(() -> {
+                    view.showRemovedFromFavorites();
+                }, this::handleError));
+    }
 
     private void handleError(Throwable error) {
         view.hideLoading();

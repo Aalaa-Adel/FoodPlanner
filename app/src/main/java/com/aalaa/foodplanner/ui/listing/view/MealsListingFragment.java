@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+
+import com.aalaa.foodplanner.data.repository.MealRepositoryImpl;
 import com.aalaa.foodplanner.ui.common.AppSnack;
 
 import androidx.annotation.NonNull;
@@ -16,9 +18,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.aalaa.foodplanner.R;
 import com.aalaa.foodplanner.data.datasource.remote.MealRemoteDataSource;
-import com.aalaa.foodplanner.data.repository.MealRepositoryImpl;
 import com.aalaa.foodplanner.domain.models.MealSpecification;
 import com.aalaa.foodplanner.domain.models.MealsItem;
+import com.aalaa.foodplanner.data.repository.FavoritesRepositoryImpl;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import com.aalaa.foodplanner.ui.listing.presenter.MealsListingPresenterImpl;
 
 import java.util.List;
@@ -46,7 +50,9 @@ public class MealsListingFragment extends Fragment
         initViews(view);
         setupRecyclerView();
 
-        presenter = new MealsListingPresenterImpl(this, new MealRepositoryImpl(MealRemoteDataSource.getInstance()));
+        presenter = new MealsListingPresenterImpl(this,
+                new MealRepositoryImpl(MealRemoteDataSource.getInstance()),
+                FavoritesRepositoryImpl.getInstance(requireActivity().getApplication()));
 
         MealsListingFragmentArgs args = MealsListingFragmentArgs.fromBundle(getArguments());
         String type = args.getType();
@@ -79,7 +85,38 @@ public class MealsListingFragment extends Fragment
 
     @Override
     public void onFavoriteClick(MealSpecification meal) {
-        AppSnack.showInfo(requireView(), "Favorite clicked: " + meal.getStrMeal());
+        FavoritesRepositoryImpl.getInstance(requireActivity().getApplication())
+                .isFavorite(meal.getIdMeal())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(isFav -> {
+                    if (isFav) {
+                        presenter.removeFromFavorites(convertToMealsItem(meal));
+                        meal.setFavorite(false);
+                    } else {
+                        presenter.addToFavorites(convertToMealsItem(meal));
+                        meal.setFavorite(true);
+                    }
+                    adapter.notifyDataSetChanged();
+                }, error -> showError(error.getMessage()));
+    }
+
+    @Override
+    public void showAddedToFavorites() {
+        AppSnack.showSuccess(requireView(), "Added to Favorites ❤️");
+    }
+
+    @Override
+    public void showRemovedFromFavorites() {
+        AppSnack.showInfo(requireView(), "Removed from Favorites");
+    }
+
+    private MealsItem convertToMealsItem(MealSpecification spec) {
+        MealsItem item = new MealsItem();
+        item.setIdMeal(spec.getIdMeal());
+        item.setStrMeal(spec.getStrMeal());
+        item.setStrMealThumb(spec.getStrMealThumb());
+        return item;
     }
 
     @Override

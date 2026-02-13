@@ -15,4 +15,8 @@ public interface MealsListingView {
     void hideLoading();
 
     void showError(String message);
+
+    void showAddedToFavorites();
+
+    void showRemovedFromFavorites();
 }
