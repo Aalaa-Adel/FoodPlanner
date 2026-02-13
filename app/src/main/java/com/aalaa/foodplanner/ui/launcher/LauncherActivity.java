@@ -16,23 +16,7 @@ public class LauncherActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SessionManager sessionManager = SessionManager.getInstance(this);
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = auth.getCurrentUser();
-
-        boolean isGuest = sessionManager.isGuest();
-        boolean isLoggedIn = currentUser != null;
-
         Intent intent = new Intent(this, MainActivity.class);
-
-        if (isLoggedIn || isGuest) {
-            // User is logged in OR is a guest -> Go to Main (Home)
-            intent.putExtra("TARGET_DEST", "HOME");
-        } else {
-            // Not logged in AND not guest -> Go to Auth flow
-            intent.putExtra("TARGET_DEST", "AUTH");
-        }
-
         startActivity(intent);
         finish();
     }
