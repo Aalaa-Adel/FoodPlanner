@@ -27,10 +27,6 @@ public class SessionManager {
         return prefs.getBoolean(KEY_IS_GUEST, false);
     }
 
-    public void setGuest(boolean isGuest) {
-        prefs.edit().putBoolean(KEY_IS_GUEST, isGuest).apply();
-    }
-
 
     public boolean shouldRestore(String uid) {
         if (uid == null)
@@ -44,10 +40,6 @@ public class SessionManager {
         if (uid == null)
             return;
         prefs.edit().putBoolean(KEY_PREFIX_DID_RESTORE + uid, true).apply();
-    }
-
-    public void clearAll() {
-        prefs.edit().clear().apply();
     }
 
 

@@ -2,7 +2,7 @@ package com.aalaa.foodplanner.ui.plans.presenter;
 
 import android.util.Log;
 
-import com.aalaa.foodplanner.datasource.db.PlanEntity;
+import com.aalaa.foodplanner.data.db.PlanEntity;
 import com.aalaa.foodplanner.domain.models.MealsItem;
 import com.aalaa.foodplanner.domain.repository.PlanRepository;
 import com.aalaa.foodplanner.ui.plans.view.PlanView;

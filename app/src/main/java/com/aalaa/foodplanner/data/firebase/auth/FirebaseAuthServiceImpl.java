@@ -1,6 +1,6 @@
 package com.aalaa.foodplanner.data.firebase.auth;
 
-import com.aalaa.foodplanner.domain.auth.model.User;
+import com.aalaa.foodplanner.domain.models.User;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

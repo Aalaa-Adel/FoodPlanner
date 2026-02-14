@@ -1,8 +1,8 @@
 package com.aalaa.foodplanner.data.firebase;
 
-import com.aalaa.foodplanner.domain.auth.model.MealPlan;
-import com.aalaa.foodplanner.domain.auth.model.User;
-import com.aalaa.foodplanner.domain.auth.model.UserSettings;
+import com.aalaa.foodplanner.domain.models.MealPlan;
+import com.aalaa.foodplanner.domain.models.User;
+import com.aalaa.foodplanner.domain.models.UserSettings;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,40 +23,6 @@ public class UserSessionManager {
 
     public synchronized User getCurrentUser() {
         return currentUser;
-    }
-
-    public synchronized boolean hasUser() {
-        return currentUser != null;
-    }
-
-    public synchronized String getCurrentUserId() {
-        return currentUser != null ? currentUser.getUid() : null;
-    }
-
-    public synchronized UserSettings getSettings() {
-        if (currentUser != null && currentUser.getSettings() != null) {
-            return currentUser.getSettings();
-        }
-        return new UserSettings();
-    }
-
-    public synchronized void updateSettings(UserSettings settings) {
-        if (currentUser != null) {
-            currentUser.setSettings(settings);
-        }
-    }
-
-    public synchronized List<String> getFavoriteMealIds() {
-        if (currentUser != null && currentUser.getFavoriteMealIds() != null) {
-            return new ArrayList<>(currentUser.getFavoriteMealIds());
-        }
-        return new ArrayList<>();
-    }
-
-    public synchronized void setFavoriteMealIds(List<String> mealIds) {
-        if (currentUser != null) {
-            currentUser.setFavoriteMealIds(mealIds != null ? new ArrayList<>(mealIds) : new ArrayList<>());
-        }
     }
 
     public synchronized void addFavoriteMeal(String mealId) {
@@ -83,21 +49,10 @@ public class UserSessionManager {
         return false;
     }
 
-    public synchronized MealPlan getMealPlan() {
-        return mealPlan;
-    }
-
-    public synchronized void setMealPlan(MealPlan plan) {
-        this.mealPlan = plan;
-    }
 
     public synchronized void clearSession() {
         currentUser = null;
         mealPlan = null;
         isInitialized = false;
-    }
-
-    public synchronized boolean isInitialized() {
-        return isInitialized;
     }
 }

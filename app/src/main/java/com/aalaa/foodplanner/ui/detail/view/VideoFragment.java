@@ -160,13 +160,6 @@ public class VideoFragment extends Fragment {
     private String extractYouTubeId(String url) {
         if (url == null || url.trim().isEmpty())
             return null;
-
-        // Comprehensive regex for various YouTube URL patterns:
-        // - standard: youtube.com/watch?v=ID
-        // - shortened: youtu.be/ID
-        // - embed: youtube.com/embed/ID
-        // - shorts: youtube.com/shorts/ID
-        // - direct ID (11 chars)
         String pattern = "(?:https?:\\/\\/)?(?:www\\.)?(?:youtube\\.com\\/(?:[^\\/\\n\\s]+\\/\\S+\\/|(?:v|e(?:mbed)?)\\/|\\S*?[?&]v=|shorts\\/)|youtu\\.be\\/)([a-zA-Z0-9_-]{11})";
 
         java.util.regex.Pattern compiledPattern = java.util.regex.Pattern.compile(pattern);
@@ -176,7 +169,6 @@ public class VideoFragment extends Fragment {
             return matcher.group(1);
         }
 
-        // Fallback for just the ID if the full URL wasn't matched but looks like an ID
         if (url.length() == 11 && url.matches("[a-zA-Z0-9_-]{11}")) {
             return url;
         }

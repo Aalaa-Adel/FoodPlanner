@@ -2,15 +2,15 @@ package com.aalaa.foodplanner.data.repository;
 
 import android.app.Application;
 
+import com.aalaa.foodplanner.data.db.AppDatabase;
+import com.aalaa.foodplanner.data.db.PendingActionDao;
 import com.aalaa.foodplanner.data.local.FavoritesLocalDataSource;
-import com.aalaa.foodplanner.datasource.db.FavoriteMealDao;
-import com.aalaa.foodplanner.datasource.db.FavoriteMealEntity;
-import com.aalaa.foodplanner.datasource.db.PendingAction;
+import com.aalaa.foodplanner.data.db.FavoriteMealEntity;
+import com.aalaa.foodplanner.data.db.PendingAction;
 import com.aalaa.foodplanner.domain.models.MealsItem;
 import com.aalaa.foodplanner.domain.repository.FavoritesRepository;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Flowable;
@@ -20,11 +20,11 @@ public class FavoritesRepositoryImpl implements FavoritesRepository {
 
     private static volatile FavoritesRepositoryImpl instance;
     private final FavoritesLocalDataSource favoritesLocalDataSource;
-    private final com.aalaa.foodplanner.datasource.db.PendingActionDao pendingActionDao;
+    private final PendingActionDao pendingActionDao;
 
     public FavoritesRepositoryImpl(Application application) {
         this.favoritesLocalDataSource = new FavoritesLocalDataSource(application);
-        this.pendingActionDao = com.aalaa.foodplanner.datasource.db.AppDatabase.getInstance(application)
+        this.pendingActionDao = AppDatabase.getInstance(application)
                 .pendingActionDao();
     }
 

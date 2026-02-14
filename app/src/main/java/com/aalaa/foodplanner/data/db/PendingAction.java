@@ -1,4 +1,4 @@
-package com.aalaa.foodplanner.datasource.db;
+package com.aalaa.foodplanner.data.db;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;

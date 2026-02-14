@@ -2,9 +2,9 @@ package com.aalaa.foodplanner.data.local;
 
 import android.content.Context;
 
-import com.aalaa.foodplanner.datasource.db.AppDatabase;
-import com.aalaa.foodplanner.datasource.db.PlanDao;
-import com.aalaa.foodplanner.datasource.db.PlanEntity;
+import com.aalaa.foodplanner.data.db.AppDatabase;
+import com.aalaa.foodplanner.data.db.PlanDao;
+import com.aalaa.foodplanner.data.db.PlanEntity;
 
 import java.util.List;
 

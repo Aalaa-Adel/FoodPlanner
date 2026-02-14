@@ -1,4 +1,4 @@
-package com.aalaa.foodplanner.datasource.db;
+package com.aalaa.foodplanner.data.db;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;

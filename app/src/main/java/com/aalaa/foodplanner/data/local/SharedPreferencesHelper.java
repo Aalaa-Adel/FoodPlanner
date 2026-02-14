@@ -64,10 +64,6 @@ public class SharedPreferencesHelper {
         return preferences.getString(SharedPreferencesKeysConfig.KEY_LANGUAGE, "en");
     }
 
-    public void clearAll() {
-        preferences.edit().clear().apply();
-    }
-
     public void clearUserData() {
         boolean onboardingCompleted = isOnboardingCompleted();
         preferences.edit()

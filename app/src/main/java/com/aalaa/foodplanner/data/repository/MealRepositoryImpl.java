@@ -41,11 +41,6 @@ public class MealRepositoryImpl implements MealRepository {
     }
 
     @Override
-    public Single<List<MealsItem>> getMultipleRandomMeals(int count) {
-        return remoteDataSource.getMultipleRandomMeals(count);
-    }
-
-    @Override
     public Single<MealsItem> getMealById(String id) {
         return remoteDataSource.getMealById(id)
                 .map(response -> {
@@ -56,7 +51,10 @@ public class MealRepositoryImpl implements MealRepository {
                 });
     }
 
-
+    @Override
+    public Single<List<MealsItem>> getMultipleRandomMeals(int count) {
+        return remoteDataSource.getMultipleRandomMeals(count);
+    }
     @Override
     public Single<MealCategoryResponse> getMealsByCategory(String category) {
         return remoteDataSource.filterByCategory(category);
@@ -77,12 +75,6 @@ public class MealRepositoryImpl implements MealRepository {
     public Single<CategoryResponse> getAllCategories() {
         return remoteDataSource.getAllCategories();
     }
-
-    @Override
-    public Single<CategoryResponse> getCategoriesList() {
-        return remoteDataSource.getCategoriesList();
-    }
-
 
     @Override
     public Single<AreaResponse> getAllAreas() {

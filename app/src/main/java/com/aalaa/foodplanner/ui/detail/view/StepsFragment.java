@@ -78,7 +78,4 @@ public class StepsFragment extends Fragment {
 
         return steps;
     }
-
-    private void loadSampleData() {
-    }
 }

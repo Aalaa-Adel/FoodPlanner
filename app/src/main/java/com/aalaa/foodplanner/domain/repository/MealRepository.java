@@ -18,8 +18,6 @@ public interface MealRepository {
 
     Single<MealResponse> getRandomMeal();
 
-    Single<List<MealsItem>> getMultipleRandomMeals(int count);
-
     Single<MealsItem> getMealById(String id);
 
 
@@ -32,11 +30,9 @@ public interface MealRepository {
 
     Single<CategoryResponse> getAllCategories();
 
-    Single<CategoryResponse> getCategoriesList();
-
-
     Single<AreaResponse> getAllAreas();
 
+    Single<List<MealsItem>> getMultipleRandomMeals(int count);
 
     Single<IngredientsResponse> getAllIngredients();
 }

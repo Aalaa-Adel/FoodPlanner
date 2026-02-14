@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.aalaa.foodplanner.R;
 import com.aalaa.foodplanner.data.repository.PlanRepositoryImpl;
-import com.aalaa.foodplanner.datasource.db.PlanEntity;
+import com.aalaa.foodplanner.data.db.PlanEntity;
 import com.aalaa.foodplanner.domain.models.MealsItem;
 import com.aalaa.foodplanner.ui.plans.presenter.PlanPresenterImpl;
 

@@ -1,4 +1,4 @@
-package com.aalaa.foodplanner.domain.auth.model;
+package com.aalaa.foodplanner.domain.models;
 
 import java.util.ArrayList;
 import java.util.List;

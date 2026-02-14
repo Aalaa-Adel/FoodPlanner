@@ -14,13 +14,6 @@ import retrofit2.http.Query;
 
 public interface MealServices {
 
-
-    @GET("search.php")
-    Single<MealResponse> getMealByName(@Query("s") String mealName);
-
-    @GET("search.php")
-    Single<MealResponse> getMealByFirstLetter(@Query("f") String firstLetter);
-
     @GET("lookup.php")
     Single<MealResponse> getMealById(@Query("i") String mealId);
 

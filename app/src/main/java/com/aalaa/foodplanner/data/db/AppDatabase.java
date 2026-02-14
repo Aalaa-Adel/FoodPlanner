@@ -1,4 +1,4 @@
-package com.aalaa.foodplanner.datasource.db;
+package com.aalaa.foodplanner.data.db;
 
 import android.content.Context;
 
@@ -28,7 +28,7 @@ public abstract class AppDatabase extends RoomDatabase {
                             context.getApplicationContext(),
                             AppDatabase.class,
                             "app_database")
-                            .fallbackToDestructiveMigration() // For simplicity in this phase
+                            .fallbackToDestructiveMigration()
                             .build();
                 }
             }

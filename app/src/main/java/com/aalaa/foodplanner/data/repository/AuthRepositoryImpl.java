@@ -5,11 +5,8 @@ import com.aalaa.foodplanner.data.firebase.UserSessionManager;
 import com.aalaa.foodplanner.data.firebase.auth.FirebaseAuthService;
 import com.aalaa.foodplanner.data.firebase.firestore.FirestoreService;
 import com.aalaa.foodplanner.data.local.SharedPreferencesHelper;
-import com.aalaa.foodplanner.domain.auth.model.DayMeals;
-import com.aalaa.foodplanner.domain.auth.model.MealPlan;
-import com.aalaa.foodplanner.domain.auth.model.MealType;
-import com.aalaa.foodplanner.domain.auth.model.User;
-import com.aalaa.foodplanner.domain.auth.model.UserSettings;
+import com.aalaa.foodplanner.domain.models.User;
+import com.aalaa.foodplanner.domain.models.UserSettings;
 import com.aalaa.foodplanner.domain.repository.AuthRepository;
 
 import java.util.List;

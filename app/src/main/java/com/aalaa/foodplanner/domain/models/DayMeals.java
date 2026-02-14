@@ -1,4 +1,4 @@
-package com.aalaa.foodplanner.domain.auth.model;
+package com.aalaa.foodplanner.domain.models;
 
 public class DayMeals {
     private String breakfast;

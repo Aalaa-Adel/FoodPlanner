@@ -4,13 +4,20 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.navigation.NavController;
-import androidx.navigation.NavDestination;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
+import com.aalaa.foodplanner.data.datasource.remote.MealRemoteDataSource;
+import com.aalaa.foodplanner.data.db.AppDatabase;
 import com.aalaa.foodplanner.data.firebase.FirebaseModule;
+import com.aalaa.foodplanner.data.local.SharedPreferencesHelper;
+import com.aalaa.foodplanner.data.network.ConnectivityObserver;
+import com.aalaa.foodplanner.data.repository.FavoritesRepositoryImpl;
+import com.aalaa.foodplanner.data.repository.MealRepositoryImpl;
+import com.aalaa.foodplanner.data.repository.PlanRepositoryImpl;
+import com.aalaa.foodplanner.data.repository.SyncRepositoryImpl;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.HashSet;
@@ -43,14 +50,14 @@ public class MainActivity extends AppCompatActivity {
         protected void onCreate(Bundle savedInstanceState) {
                 super.onCreate(savedInstanceState);
 
-                com.aalaa.foodplanner.data.local.SharedPreferencesHelper prefs = new com.aalaa.foodplanner.data.local.SharedPreferencesHelper(
+                SharedPreferencesHelper prefs = new SharedPreferencesHelper(
                                 this);
                 if (prefs.isDarkMode()) {
-                        androidx.appcompat.app.AppCompatDelegate
-                                        .setDefaultNightMode(androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES);
+                        AppCompatDelegate
+                                        .setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                 } else {
-                        androidx.appcompat.app.AppCompatDelegate
-                                        .setDefaultNightMode(androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO);
+                       AppCompatDelegate
+                                        .setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 }
 
                 FirebaseModule.initialize(this);
@@ -78,21 +85,21 @@ public class MainActivity extends AppCompatActivity {
         }
 
         private void setupSyncObserver() {
-                com.aalaa.foodplanner.data.network.ConnectivityObserver connectivityObserver = com.aalaa.foodplanner.data.network.ConnectivityObserver
+                ConnectivityObserver connectivityObserver =ConnectivityObserver
                                 .getInstance(this);
 
-                com.aalaa.foodplanner.data.repository.FavoritesRepositoryImpl favRepo = com.aalaa.foodplanner.data.repository.FavoritesRepositoryImpl
+                FavoritesRepositoryImpl favRepo = FavoritesRepositoryImpl
                                 .getInstance(getApplication());
-                com.aalaa.foodplanner.data.repository.PlanRepositoryImpl planRepo = com.aalaa.foodplanner.data.repository.PlanRepositoryImpl
+                PlanRepositoryImpl planRepo = PlanRepositoryImpl
                                 .getInstance(getApplication());
-                com.aalaa.foodplanner.data.datasource.remote.MealRemoteDataSource remoteSource = com.aalaa.foodplanner.data.datasource.remote.MealRemoteDataSource
+                MealRemoteDataSource remoteSource = MealRemoteDataSource
                                 .getInstance();
-                com.aalaa.foodplanner.data.repository.MealRepositoryImpl mealRepo = com.aalaa.foodplanner.data.repository.MealRepositoryImpl
+                MealRepositoryImpl mealRepo = MealRepositoryImpl
                                 .getInstance(remoteSource);
-                com.aalaa.foodplanner.datasource.db.AppDatabase db = com.aalaa.foodplanner.datasource.db.AppDatabase
+                AppDatabase db = AppDatabase
                                 .getInstance(getApplication());
 
-                com.aalaa.foodplanner.data.repository.SyncRepositoryImpl syncRepo = com.aalaa.foodplanner.data.repository.SyncRepositoryImpl
+                SyncRepositoryImpl syncRepo =SyncRepositoryImpl
                                 .getInstance(favRepo, planRepo, mealRepo, db.pendingActionDao());
 
                 disposables.add(

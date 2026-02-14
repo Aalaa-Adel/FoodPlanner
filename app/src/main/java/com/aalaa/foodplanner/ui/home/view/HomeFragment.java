@@ -23,7 +23,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.aalaa.foodplanner.R;
 import com.aalaa.foodplanner.data.repository.FavoritesRepositoryImpl;
-import com.aalaa.foodplanner.datasource.db.AppDatabase;
 import com.aalaa.foodplanner.data.datasource.remote.MealRemoteDataSource;
 import com.aalaa.foodplanner.domain.models.Area;
 import com.aalaa.foodplanner.domain.models.Category;

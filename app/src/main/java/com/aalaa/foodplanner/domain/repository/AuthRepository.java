@@ -1,10 +1,7 @@
 package com.aalaa.foodplanner.domain.repository;
 
-import com.aalaa.foodplanner.domain.auth.model.DayMeals;
-import com.aalaa.foodplanner.domain.auth.model.MealPlan;
-import com.aalaa.foodplanner.domain.auth.model.MealType;
-import com.aalaa.foodplanner.domain.auth.model.User;
-import com.aalaa.foodplanner.domain.auth.model.UserSettings;
+import com.aalaa.foodplanner.domain.models.User;
+import com.aalaa.foodplanner.domain.models.UserSettings;
 
 import java.util.List;
 

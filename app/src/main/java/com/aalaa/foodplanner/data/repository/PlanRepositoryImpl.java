@@ -3,10 +3,10 @@ package com.aalaa.foodplanner.data.repository;
 import android.app.Application;
 
 import com.aalaa.foodplanner.data.local.PlansLocalDataSource;
-import com.aalaa.foodplanner.datasource.db.AppDatabase;
-import com.aalaa.foodplanner.datasource.db.PendingAction;
-import com.aalaa.foodplanner.datasource.db.PendingActionDao;
-import com.aalaa.foodplanner.datasource.db.PlanEntity;
+import com.aalaa.foodplanner.data.db.AppDatabase;
+import com.aalaa.foodplanner.data.db.PendingAction;
+import com.aalaa.foodplanner.data.db.PendingActionDao;
+import com.aalaa.foodplanner.data.db.PlanEntity;
 import com.aalaa.foodplanner.domain.models.MealsItem;
 import com.aalaa.foodplanner.domain.repository.PlanRepository;
 
@@ -68,11 +68,6 @@ public class PlanRepositoryImpl implements PlanRepository {
 
         return localDataSource.deletePlan(plan)
                 .andThen(pendingActionDao.insert(action));
-    }
-
-    @Override
-    public Flowable<List<PlanEntity>> getPlansByDate(String date) {
-        return localDataSource.getPlansByDate(date);
     }
 
     @Override

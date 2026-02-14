@@ -1,8 +1,7 @@
-package com.aalaa.foodplanner.datasource.db;
+package com.aalaa.foodplanner.data.db;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 import com.aalaa.foodplanner.domain.models.MealsItem;
 

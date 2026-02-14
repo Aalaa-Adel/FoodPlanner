@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.aalaa.foodplanner.data.db.AppDatabase;
 import com.aalaa.foodplanner.ui.common.AppSnack;
 
 import androidx.annotation.NonNull;
@@ -80,7 +82,7 @@ public class LoginFragment extends Fragment implements LoginView {
         PlanRepositoryImpl planRepo = PlanRepositoryImpl.getInstance(requireActivity().getApplication());
         MealRemoteDataSource remoteSource = MealRemoteDataSource.getInstance();
         MealRepositoryImpl mealRepo = MealRepositoryImpl.getInstance(remoteSource);
-        com.aalaa.foodplanner.datasource.db.AppDatabase db = com.aalaa.foodplanner.datasource.db.AppDatabase
+        AppDatabase db = AppDatabase
                 .getInstance(requireActivity().getApplication());
         SyncRepositoryImpl syncRepo = SyncRepositoryImpl.getInstance(favoritesRepo, planRepo, mealRepo,
                 db.pendingActionDao());

@@ -1,6 +1,6 @@
 package com.aalaa.foodplanner.data.firebase.auth;
 
-import com.aalaa.foodplanner.domain.auth.model.User;
+import com.aalaa.foodplanner.domain.models.User;
 
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Single;

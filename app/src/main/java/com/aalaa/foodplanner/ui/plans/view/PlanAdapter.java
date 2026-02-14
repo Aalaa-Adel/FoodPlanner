@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aalaa.foodplanner.R;
-import com.aalaa.foodplanner.datasource.db.PlanEntity;
+import com.aalaa.foodplanner.data.db.PlanEntity;
 import com.bumptech.glide.Glide;
 import com.google.android.material.imageview.ShapeableImageView;
 

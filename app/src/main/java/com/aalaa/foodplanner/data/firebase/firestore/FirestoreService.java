@@ -1,10 +1,10 @@
 package com.aalaa.foodplanner.data.firebase.firestore;
 
-import com.aalaa.foodplanner.domain.auth.model.DayMeals;
-import com.aalaa.foodplanner.domain.auth.model.MealPlan;
-import com.aalaa.foodplanner.domain.auth.model.MealType;
-import com.aalaa.foodplanner.domain.auth.model.User;
-import com.aalaa.foodplanner.domain.auth.model.UserSettings;
+import com.aalaa.foodplanner.domain.models.DayMeals;
+import com.aalaa.foodplanner.domain.models.MealPlan;
+import com.aalaa.foodplanner.domain.models.MealType;
+import com.aalaa.foodplanner.domain.models.User;
+import com.aalaa.foodplanner.domain.models.UserSettings;
 
 import java.util.List;
 

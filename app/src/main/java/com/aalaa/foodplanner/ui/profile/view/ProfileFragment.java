@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
+import com.aalaa.foodplanner.data.db.AppDatabase;
 import com.aalaa.foodplanner.ui.common.AppSnack;
 
 import androidx.annotation.NonNull;
@@ -144,7 +146,7 @@ public class ProfileFragment extends Fragment implements ProfileView {
 
         MealRepositoryImpl mealRepo = new MealRepositoryImpl(MealRemoteDataSource.getInstance());
 
-        com.aalaa.foodplanner.datasource.db.AppDatabase db = com.aalaa.foodplanner.datasource.db.AppDatabase
+        AppDatabase db = AppDatabase
                 .getInstance(requireActivity().getApplication());
         return SyncRepositoryImpl.getInstance(favoritesRepo, planRepo, mealRepo, db.pendingActionDao());
     }

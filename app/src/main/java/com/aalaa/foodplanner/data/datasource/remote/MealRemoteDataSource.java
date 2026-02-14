@@ -39,23 +39,6 @@ public class MealRemoteDataSource {
         return mealServices.getRandomMeal();
     }
 
-    public Single<List<MealsItem>> getMultipleRandomMeals(int count) {
-        List<Single<MealResponse>> calls = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            calls.add(mealServices.getRandomMeal());
-        }
-
-        return Single.zip(calls, responses -> {
-            List<MealsItem> allMeals = new ArrayList<>();
-            for (Object response : responses) {
-                MealResponse mealResponse = (MealResponse) response;
-                if (mealResponse.getMeals() != null && !mealResponse.getMeals().isEmpty()) {
-                    allMeals.add(mealResponse.getMeals().get(0));
-                }
-            }
-            return allMeals;
-        });
-    }
 
     public Single<MealResponse> getMealById(String id) {
         return mealServices.getMealById(id);
@@ -88,4 +71,22 @@ public class MealRemoteDataSource {
     public Single<IngredientsResponse> getIngredients() {
         return mealServices.getIngredientsList();
     }
+    public Single<List<MealsItem>> getMultipleRandomMeals(int count) {
+        List<Single<MealResponse>> calls = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            calls.add(mealServices.getRandomMeal());
+        }
+
+        return Single.zip(calls, responses -> {
+            List<MealsItem> allMeals = new ArrayList<>();
+            for (Object response : responses) {
+                MealResponse mealResponse = (MealResponse) response;
+                if (mealResponse.getMeals() != null && !mealResponse.getMeals().isEmpty()) {
+                    allMeals.add(mealResponse.getMeals().get(0));
+                }
+            }
+            return allMeals;
+        });
+    }
+
 }

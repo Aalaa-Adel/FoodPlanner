@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aalaa.foodplanner.R;
-import com.aalaa.foodplanner.datasource.db.AppDatabase;
+import com.aalaa.foodplanner.data.db.AppDatabase;
 import com.aalaa.foodplanner.domain.models.MealsItem;
 import com.aalaa.foodplanner.data.repository.FavoritesRepositoryImpl;
 import com.aalaa.foodplanner.ui.favorites.presenter.FavoritesPresenterImp;

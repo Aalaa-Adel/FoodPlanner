@@ -1,4 +1,4 @@
-package com.aalaa.foodplanner.domain.auth.model;
+package com.aalaa.foodplanner.domain.models;
 
 import java.util.HashMap;
 import java.util.Map;

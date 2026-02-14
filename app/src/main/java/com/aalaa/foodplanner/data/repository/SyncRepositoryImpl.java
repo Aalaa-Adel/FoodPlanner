@@ -4,8 +4,8 @@ import com.aalaa.foodplanner.domain.repository.FavoritesRepository;
 import com.aalaa.foodplanner.domain.repository.PlanRepository;
 import com.aalaa.foodplanner.domain.repository.MealRepository;
 import com.aalaa.foodplanner.domain.repository.SyncRepository;
-import com.aalaa.foodplanner.datasource.db.PendingAction;
-import com.aalaa.foodplanner.datasource.db.PendingActionDao;
+import com.aalaa.foodplanner.data.db.PendingAction;
+import com.aalaa.foodplanner.data.db.PendingActionDao;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -176,21 +176,13 @@ public class SyncRepositoryImpl implements SyncRepository {
 
                     FirebaseUser user = auth.getCurrentUser();
                     if (user == null)
-                        return Completable.complete(); // Should not happen if called when online & logged in
+                        return Completable.complete();
                     String uid = user.getUid();
 
                     List<Completable> tasks = new ArrayList<>();
                     for (PendingAction action : actions) {
-                        tasks.add(executeAction(uid, action).andThen(pendingActionDao.delete(action))); // Assuming
-                                                                                                        // delete(action)
-                                                                                                        // exists or we
-                                                                                                        // use clearAll
-                                                                                                        // later?
-                        // PendingActionDao interface showed 'insert', 'getAll', 'clearAll'.
-                        // It did NOT show 'delete(action)'.
-                        // I should verify PendingActionDao or use clearAll() if I process strictly
-                        // sequentially?
-                        // Better to add 'delete(action)' to DAO.
+                        tasks.add(executeAction(uid, action).andThen(pendingActionDao.delete(action)));
+
                     }
                     return Completable.concat(tasks);
                 });
@@ -203,9 +195,8 @@ public class SyncRepositoryImpl implements SyncRepository {
                 return taskToCompletable(
                         firestore.collection(USERS).document(uid)
                                 .update(FAVORITE_MEALS, FieldValue.arrayRemove(mealId)))
-                        .onErrorComplete(); // Ignore if already deleted or doc doesn't exist
+                        .onErrorComplete();
             } else if ("PLAN".equals(action.entityType)) {
-                // Payload expected: "date,slot"
                 String[] parts = action.payload.split(",");
                 if (parts.length != 2)
                     return Completable.complete();
@@ -224,7 +215,6 @@ public class SyncRepositoryImpl implements SyncRepository {
         return Completable.complete();
     }
 
-    @SuppressWarnings("unchecked")
     private void processRestore(Object[] arr) {
         DocumentSnapshot userDoc = (DocumentSnapshot) arr[1];
         QuerySnapshot plansSnap = (QuerySnapshot) arr[2];

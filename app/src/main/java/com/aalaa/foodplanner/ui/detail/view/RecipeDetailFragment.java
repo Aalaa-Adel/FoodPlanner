@@ -20,7 +20,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.aalaa.foodplanner.R;
 import com.aalaa.foodplanner.data.repository.FavoritesRepositoryImpl;
 import com.aalaa.foodplanner.data.repository.PlanRepositoryImpl;
-import com.aalaa.foodplanner.datasource.db.PlanEntity;
+import com.aalaa.foodplanner.data.db.PlanEntity;
 import com.aalaa.foodplanner.domain.models.MealsItem;
 import com.aalaa.foodplanner.data.datasource.remote.MealRemoteDataSource;
 import com.aalaa.foodplanner.data.repository.MealRepositoryImpl;
