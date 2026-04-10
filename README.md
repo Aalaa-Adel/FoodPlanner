@@ -1,106 +1,99 @@
-🍽️ FoodPlanner (MealMate) — Meal Discovery & Planning App
+![Platform](https://img.shields.io/badge/Platform-Android-green)
+![Language](https://img.shields.io/badge/Language-Java-orange)
+![Architecture](https://img.shields.io/badge/Architecture-MVP-purple)
+![Reactive](https://img.shields.io/badge/RxJava3-Enabled-red)
+![Database](https://img.shields.io/badge/Local-Room-blue)
+![Backend](https://img.shields.io/badge/Backend-Firebase-yellow)
+![License](https://img.shields.io/badge/License-MIT-gold)
 
-FoodPlanner is an Android application that helps users discover meals, explore categories & countries, save favorites, and build a personal meal plan — with a smooth UI, offline-friendly UX, and smart sync when the connection comes back 🔄.
+# 🍽️ FoodPlanner (MealMate)
 
-Built with clean architecture mindset (UI / Data / Domain), modern Android components, and Firebase authentication.
+**Meal Discovery & Planning App for Android**
 
-✨ Features
-✅ Core
+FoodPlanner (MealMate) is a full-featured Android application that allows users to discover meals, explore categories and countries, save favorites, and build personalized meal plans — with offline-first support and smart synchronization.
 
-Authentication: Login / Sign up with Firebase Auth
+---
 
-Home Experience
+## 📚 Table of Contents
+- [Features](#-features)
+- [Screenshots](#-screenshots)
+- [Architecture](#-architecture)
+- [Tech Stack](#-tech-stack)
+- [Project Structure](#-project-structure)
+- [Data Flow](#-data-flow)
+- [Offline & Sync](#-offline--sync)
+- [App Flow](#-app-flow)
+- [Setup](#️-setup)
+- [API](#-api)
+- [Challenges & Solutions](#️-challenges)
+- [Future Improvements](#-future-improvements)
+- [License](#-license)
 
-Meal of the Day
+---
 
-“For You” meals
+## ✨ Features
 
-Browse Categories & Countries
+### 🔐 Authentication
+- Firebase Authentication (Login / Sign up)
+- Persistent session management
+- Guest mode support
 
-Recipe Details screen (SafeArgs navigation with MealsItem)
+### 🍽 Meal Discovery
+- Meal of the Day
+- “For You” personalized meals
+- Browse by categories & countries
+- Full meal details (ingredients / steps / video)
+- Smart search functionality
 
-Favorites: Save meals to favorites ❤️
+### ❤️ Favorites
+- Add / remove favorite meals
+- Offline support using Room
 
-Plan: Build and manage your meal plan 📅
+### 📅 Meal Planning
+- Weekly meal planner
+- Add/remove meals per day
+- Organized plan structure
 
-Profile
+### 🌐 Offline & Sync
+- Local Room database
+- Connectivity observer
+- Pending actions system
+- Auto-sync when internet returns
 
-Backup & Restore
+### 🎨 UI / UX
+- Material Design
+- Dark / Light mode
+- Multi-language (Arabic / English)
+- Smooth and clean UI
 
-Logout flow
+---
 
-Language switch (Arabic / English)
+## 📱 Screenshots
 
-Dark mode toggle 🌙
+| Splash | Onboarding | Login |
+|---|---|---|
+| ![](screenshots/splash.png) | ![](screenshots/onboarding.png) | ![](screenshots/login.png) |
 
-🌐 Network-aware (Online / Offline)
+| Home Dark | Home Light | Search |
+|---|---|---|
+| ![](screenshots/home_dark.png) | ![](screenshots/home.png) | ![](screenshots/search.png) |
 
-Real-time network tracking using ConnectivityObserver
+| Meal Details | Favorites | Plans |
+|---|---|---|
+| ![](screenshots/meal_details.png) | ![](screenshots/favorites.png) | ![](screenshots/plans.png) |
 
-Background sync of pending actions when connection returns (RxJava)
+| Profile |
+|---|
+| ![](screenshots/profile.png) |
 
-🎨 UI/UX
+---
 
-Material Design components
+## 🏗 Architecture
 
-Custom snackbars (AppSnack) with:
-
-Success / Error / Info states
-
-Dark / Light theming support
-
-Rounded + stroked background styling
-
-🧱 Tech Stack
-
-Language: Java (UI layer)
-
-Architecture: MVP + Repository pattern (Data/Domain separation)
-
-Navigation: Jetpack Navigation Component (Root/Auth/Main graphs)
-
-Reactive: RxJava3
-
-Image Loading: Glide
-
-Auth: Firebase Authentication
-
-Local Persistence: Room database (AppDatabase)
-
-Preferences: SharedPreferences (SharedPreferencesHelper, SessionManager)
-
-UI: Material Components (Material3 buttons, dialogs, cards)
-
-🗺️ Navigation Graphs
-
-Project navigation is split into:
-
-root_graph → Splash → routes to Auth/Main
-
-auth_graph → onboarding → login/signup → main
-
-main_graph → home/search/favorites/plan/profile + listing/details
-
-📂 Project Structure (High-level)
-com.aalaa.foodplanner
-│
-├── ui
-│   ├── home
-│   ├── profile
-│   ├── authentication
-│   ├── common (AppSnack, LanguageHelper, ...)
-│   └── ...
-│
-├── data
-│   ├── repository
-│   ├── datasource (remote/local)
-│   ├── network (ConnectivityObserver)
-│   └── firebase (FirebaseModule)
-│
-├── domain
-│   ├── models
-│   ├── repository interfaces
-│   └── usecase (SyncPolicy)
-│
-└── datasource
-    └── db (Room - AppDatabase, DAO)
+```mermaid
+flowchart TD
+    UI[UI Layer] --> DOMAIN[Domain Layer]
+    DOMAIN --> DATA[Data Layer]
+    DATA --> ROOM[Room Database]
+    DATA --> FIREBASE[Firebase]
+    DATA --> API[Remote API]
