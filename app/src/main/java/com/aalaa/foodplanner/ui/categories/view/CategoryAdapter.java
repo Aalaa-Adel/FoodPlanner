@@ -42,7 +42,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
         Glide.with(context)
                 .load(category.getStrCategoryThumb())
-                .placeholder(R.drawable.avatar_placeholder)
+                .placeholder(R.drawable.avatar_placeholders)
                 .into(holder.ivCategoryThumb);
 
         holder.itemView.setOnClickListener(v -> {

@@ -206,8 +206,8 @@ public class RecipeDetailFragment extends Fragment implements DetailView, FavVie
 
         Glide.with(requireContext())
                 .load(meal.getStrMealThumb())
-                .placeholder(R.drawable.avatar_placeholder)
-                .error(R.drawable.avatar_placeholder)
+                .placeholder(R.drawable.avatar_placeholders)
+                .error(R.drawable.avatar_placeholders)
                 .into(imageView);
     }
 

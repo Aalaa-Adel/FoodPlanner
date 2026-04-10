@@ -60,8 +60,8 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
 
         Glide.with(context)
                 .load(favoriteMealEntity.getStrMealThumb())
-                .placeholder(R.drawable.avatar_placeholder)
-                .error(R.drawable.avatar_placeholder)
+                .placeholder(R.drawable.avatar_placeholders)
+                .error(R.drawable.avatar_placeholders)
                 .into(holder.ivMealThumb);
 
         holder.btnFavorite.setOnClickListener(v -> {

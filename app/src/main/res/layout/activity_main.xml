@@ -17,11 +17,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="@color/bottom_nav_bg"
+        android:elevation="14dp"
+        android:background="@drawable/bg_bottom_nav"
         app:itemIconTint="@color/selector_bottom_nav_colors"
-        app:itemTextColor="@color/selector_bottom_nav_colors"
         app:itemTextAppearanceActive="@style/TabTextStyle"
         app:itemTextAppearanceInactive="@style/TabTextStyle"
+        app:itemTextColor="@color/selector_bottom_nav_colors"
+        app:itemActiveIndicatorStyle="@null"
         app:menu="@menu/bottom_nav_menu" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

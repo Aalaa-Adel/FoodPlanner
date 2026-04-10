@@ -1,105 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="24dp"
-    android:background="@color/card_background_color">
+    app:strokeWidth="1dp">
 
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/add_to_meal_plan2"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@color/text_primary"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <Button
-        android:id="@+id/btn_pick_date"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/select_date"
-        app:layout_constraintTop_toBottomOf="@id/tv_title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
-
-    <TextView
-        android:id="@+id/tv_selected_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/no_date_selected"
-        android:textColor="@color/text_primary"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/btn_pick_date"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="8dp"/>
-
-    <TextView
-        android:id="@+id/tv_slot_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/select_meal_time"
-        android:textStyle="bold"
-        android:textColor="@color/text_primary"
-        app:layout_constraintTop_toBottomOf="@id/tv_selected_date"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="16dp"/>
-
-    <RadioGroup
-        android:id="@+id/radio_group_slot"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tv_slot_label"
-        android:orientation="vertical">
+        android:minWidth="320dp"
+        android:padding="24dp">
 
-        <RadioButton
-            android:id="@+id/radio_breakfast"
-            android:layout_width="match_parent"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/header_icon_container"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:backgroundTint="@color/card_icon_background"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:src="@android:drawable/ic_menu_my_calendar"
+                app:tint="@color/accent_color" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/TextAppearance.FoodPlanner.Title"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/breakfast"
-            android:textColor="@color/text_primary"/>
+            android:layout_marginStart="14dp"
+            android:text="@string/add_to_meal_plan2"
+            android:textSize="24sp"
+            app:layout_constraintStart_toEndOf="@id/header_icon_container"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/header_icon_container" />
 
-        <RadioButton
-            android:id="@+id/radio_lunch"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/tv_subtitle"
+            style="@style/TextAppearance.FoodPlanner.Caption"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/lunch"
-            android:textColor="@color/text_primary"/>
+            android:layout_marginStart="14dp"
+            android:text="Choose the date and meal slot"
+            app:layout_constraintStart_toEndOf="@id/header_icon_container"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/header_icon_container" />
 
-        <RadioButton
-            android:id="@+id/radio_dinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/dinner"
-            android:textColor="@color/text_primary"/>
-    </RadioGroup>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_pick_date"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/select_date"
+            android:textAllCaps="false"
+            android:textColor="@color/text_primary"
+            app:backgroundTint="@color/surface_soft"
+            app:cornerRadius="16dp"
+            app:icon="@android:drawable/ic_menu_my_calendar"
+            app:iconGravity="textStart"
+            app:iconPadding="10dp"
+            app:iconTint="@color/accent_color"
+            app:strokeColor="@color/card_stroke_color"
+            app:layout_constraintTop_toBottomOf="@id/header_icon_container"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="end"
-        app:layout_constraintTop_toBottomOf="@id/radio_group_slot"
-        android:layout_marginTop="24dp">
-
-        <Button
-            android:id="@+id/btn_cancel"
+        <TextView
+            android:id="@+id/tv_selected_date"
+            style="@style/TextAppearance.FoodPlanner.Caption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/cancel"
-            android:textColor="@color/text_secondary"
-            android:layout_marginEnd="8dp"/>
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_dialog_hint_chip"
+            android:paddingStart="12dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="8dp"
+            android:text="@string/no_date_selected"
+            app:layout_constraintTop_toBottomOf="@id/btn_pick_date"
+            app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
-            android:id="@+id/btn_add"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/tv_slot_label"
+            style="@style/TextAppearance.FoodPlanner.Title"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/add_to_plan"
-            android:backgroundTint="@color/accent_color"/>
-    </LinearLayout>
+            android:layout_marginTop="24dp"
+            android:text="@string/select_meal_time"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_selected_date"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <RadioGroup
+            android:id="@+id/radio_group_slot"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/tv_slot_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/radio_breakfast"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:buttonTint="@color/accent_color"
+                android:gravity="center_vertical"
+                android:text="@string/breakfast"
+                android:textColor="@color/text_primary"
+                android:textSize="15sp" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/radio_lunch"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:buttonTint="@color/accent_color"
+                android:gravity="center_vertical"
+                android:text="@string/lunch"
+                android:textColor="@color/text_primary"
+                android:textSize="15sp" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/radio_dinner"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:buttonTint="@color/accent_color"
+                android:gravity="center_vertical"
+                android:text="@string/dinner"
+                android:textColor="@color/text_primary"
+                android:textSize="15sp" />
+        </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/radio_group_slot"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_cancel"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:text="@string/cancel"
+                android:textAllCaps="false"
+                android:textColor="@color/text_secondary"
+                app:cornerRadius="16dp"
+                app:strokeColor="@color/card_stroke_color" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_add"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_weight="1"
+                android:text="@string/add_to_plan"
+                android:textAllCaps="false"
+                android:textColor="@color/accent_on_color"
+                app:backgroundTint="@color/accent_color"
+                app:cornerRadius="16dp" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

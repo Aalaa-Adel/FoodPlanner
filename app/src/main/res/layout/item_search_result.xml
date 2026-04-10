@@ -38,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                tools:src="@drawable/avatar_placeholder" />
+                tools:src="@drawable/avatar_placeholders" />
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
@@ -59,7 +59,7 @@
                 android:layout_height="match_parent"
                 android:scaleType="fitCenter"
                 android:padding="6dp"
-                tools:src="@drawable/avatar_placeholder" />
+                tools:src="@drawable/avatar_placeholders" />
         </com.google.android.material.card.MaterialCardView>
 
         <TextView

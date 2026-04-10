@@ -44,7 +44,7 @@
                     android:layout_height="40dp"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="4dp"
-                    app:cardBackgroundColor="@android:color/white"
+                    app:cardBackgroundColor="@color/card_background_color"
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground">
@@ -67,7 +67,7 @@
                     android:layout_height="40dp"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="4dp"
-                    app:cardBackgroundColor="@android:color/white"
+                    app:cardBackgroundColor="@color/card_background_color"
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground">
@@ -111,7 +111,7 @@
                 android:layout_margin="20dp"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="2dp"
-                app:cardBackgroundColor="@android:color/white">
+                app:cardBackgroundColor="@color/card_background_color">
 
                 <LinearLayout
                     android:background="@color/page_background"
@@ -132,7 +132,7 @@
                             android:layout_height="wrap_content"
                             android:text="PASTA"
                             style="@style/TextAppearance.FoodPlanner.Title"
-                            android:textColor="@color/accent_light"
+                            android:textColor="@color/accent_color"
                             android:letterSpacing="0.08"/>
 
                         <TextView
@@ -173,10 +173,10 @@
                 android:layout_marginBottom="16dp"
                 app:tabMode="fixed"
                 app:tabGravity="fill"
-                app:tabIndicatorColor="@color/accent_light"
+                app:tabIndicatorColor="@color/accent_color"
                 app:tabIndicatorHeight="3dp"
-                app:tabSelectedTextColor="@color/accent_light"
-                app:tabTextColor="@color/text_secondary_light"
+                app:tabSelectedTextColor="@color/accent_color"
+                app:tabTextColor="@color/text_secondary"
                 app:tabTextAppearance="@style/TabTextStyle"/>
 
             <androidx.viewpager2.widget.ViewPager2

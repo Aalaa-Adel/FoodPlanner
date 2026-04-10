@@ -88,7 +88,7 @@ public class MealsListingAdapter extends RecyclerView.Adapter<MealsListingAdapte
 
             Glide.with(itemView.getContext())
                     .load(meal.getStrMealThumb())
-                    .placeholder(R.drawable.avatar_placeholder)
+                    .placeholder(R.drawable.avatar_placeholders)
                     .into(ivMealImage);
 
             if (meal.isFavorite()) {

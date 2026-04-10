@@ -1,22 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="background_dark">#121212</color>
-    <color name="card_dark">#1A1A1A</color>
-    <color name="text_primary_dark">#FFFFFF</color>
-    <color name="text_secondary_dark">#B3B3B3</color>
+    <color name="background_dark">#12100E</color>
+    <color name="card_dark">#1D1A17</color>
+    <color name="text_primary_dark">#F6F1EB</color>
+    <color name="text_secondary_dark">#B7ACA3</color>
+    <color name="text_tertiary_dark">#7A6F67</color>
 
-    <color name="bottom_nav_bg">#1A1A1A</color>
-    <color name="bottom_nav_item_unselected">#B3B3B3</color>
+    <color name="bottom_nav_bg">#171411</color>
+    <color name="bottom_nav_item_unselected">#8D837B</color>
 
     <color name="page_background">@color/background_dark</color>
     <color name="card_background_color">@color/card_dark</color>
     <color name="text_primary">@color/text_primary_dark</color>
     <color name="text_secondary">@color/text_secondary_dark</color>
-    <color name="text_tertiary">@color/background_dark</color>
+    <color name="text_tertiary">@color/text_tertiary_dark</color>
     <color name="accent_color">@color/accent_dark</color>
+
+    <color name="accent_on_color">#24170D</color>
+    <color name="surface_soft">#26201B</color>
+    <color name="accent_container">#352517</color>
+    <color name="card_stroke_color">#312923</color>
+    <color name="card_icon_background">#2B241E</color>
 
     <color name="auth_card_bg">#CC000000</color>
     <color name="auth_input_bg">#4D666666</color>
     <color name="auth_text">@color/text_primary_dark</color>
-    <color name="auth_hint">#80FFFFFF</color>
+    <color name="auth_hint">#99FFFFFF</color>
 </resources>

@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.aalaa.foodplanner.R;
 import com.aalaa.foodplanner.domain.models.MealsItem;
-import com.aalaa.foodplanner.ui.listing.view.OnMealClickListener;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
@@ -48,7 +47,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> {
 
         Glide.with(context)
                 .load(meal.getStrMealThumb())
-                .placeholder(R.drawable.avatar_placeholder)
+                .placeholder(R.drawable.avatar_placeholders)
                 .into(holder.mealImage);
 
         holder.itemView.setOnClickListener(v -> {

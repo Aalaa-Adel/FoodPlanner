@@ -42,8 +42,8 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
 
         Glide.with(holder.itemView.getContext())
                 .load(imageUrl)
-                .placeholder(R.drawable.avatar_placeholder)
-                .error(R.drawable.avatar_placeholder)
+                .placeholder(R.drawable.avatar_placeholders)
+                .error(R.drawable.avatar_placeholders)
                 .into(holder.ivIngredientImage);
     }
 

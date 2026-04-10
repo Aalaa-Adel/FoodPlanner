@@ -63,8 +63,8 @@ public class ExploreCategoryAdapter extends androidx.recyclerview.widget.Recycle
 
             Glide.with(context)
                     .load(url)
-                    .placeholder(R.drawable.avatar_placeholder)
-                    .error(R.drawable.avatar_placeholder)
+                    .placeholder(R.drawable.avatar_placeholders)
+                    .error(R.drawable.avatar_placeholders)
                     .into(holder.ivFlagIcon);
 
         } else {
@@ -74,12 +74,12 @@ public class ExploreCategoryAdapter extends androidx.recyclerview.widget.Recycle
             if (hasUrl) {
                 Glide.with(context)
                         .load(url)
-                        .placeholder(R.drawable.avatar_placeholder)
-                        .error(R.drawable.avatar_placeholder)
+                        .placeholder(R.drawable.avatar_placeholders)
+                        .error(R.drawable.avatar_placeholders)
                         .centerCrop()
                         .into(holder.ivCircleIcon);
             } else {
-                holder.ivCircleIcon.setImageResource(R.drawable.avatar_placeholder);
+                holder.ivCircleIcon.setImageResource(R.drawable.avatar_placeholders);
             }
         }
 

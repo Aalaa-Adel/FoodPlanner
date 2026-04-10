@@ -206,28 +206,38 @@
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_backup"
-                        style="@style/Widget.Material3.Button.TonalButton"
                         android:layout_width="match_parent"
                         android:layout_height="56dp"
                         android:layout_marginBottom="12dp"
                         android:text="@string/backup_data"
                         android:textAllCaps="false"
+                        android:textColor="@color/text_primary"
                         android:textSize="16sp"
-                        app:cornerRadius="12dp"
+                        app:backgroundTint="@color/surface_soft"
+                        app:cornerRadius="16dp"
                         app:icon="@drawable/ic_backup"
-                        app:iconGravity="textStart" />
+                        app:iconGravity="textStart"
+                        app:iconPadding="10dp"
+                        app:iconTint="@color/accent_color"
+                        app:strokeColor="@color/card_stroke_color"
+                        app:strokeWidth="1dp" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_restore"
-                        style="@style/Widget.Material3.Button.TonalButton"
                         android:layout_width="match_parent"
                         android:layout_height="56dp"
                         android:text="@string/restore_data"
                         android:textAllCaps="false"
+                        android:textColor="@color/text_primary"
                         android:textSize="16sp"
-                        app:cornerRadius="12dp"
+                        app:backgroundTint="@color/surface_soft"
+                        app:cornerRadius="16dp"
                         app:icon="@drawable/ic_restore"
-                        app:iconGravity="textStart" />
+                        app:iconGravity="textStart"
+                        app:iconPadding="10dp"
+                        app:iconTint="@color/accent_color"
+                        app:strokeColor="@color/card_stroke_color"
+                        app:strokeWidth="1dp" />
                 </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>

@@ -27,7 +27,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium"
-            tools:src="@drawable/avatar_placeholder" />
+            tools:src="@drawable/avatar_placeholders" />
 
         <TextView
             android:id="@+id/tv_meal_name"

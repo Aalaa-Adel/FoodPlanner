@@ -63,8 +63,8 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
 
         Glide.with(context)
                 .load(plan.getMeal().getStrMealThumb())
-                .placeholder(R.drawable.avatar_placeholder)
-                .error(R.drawable.avatar_placeholder)
+                .placeholder(R.drawable.avatar_placeholders)
+                .error(R.drawable.avatar_placeholders)
                 .into(holder.ivMealThumb);
 
         holder.btnRemove.setOnClickListener(v -> {

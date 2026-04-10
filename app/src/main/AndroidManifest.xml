@@ -13,6 +13,7 @@
         android:theme="@style/Theme.FoodPlanner">
         <activity
             android:name=".MainActivity"
+            android:windowSoftInputMode="adjustPan"
             android:exported="true" />
 
         <activity

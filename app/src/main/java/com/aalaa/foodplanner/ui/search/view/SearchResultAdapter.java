@@ -49,8 +49,8 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
 
         Glide.with(context)
                 .load(meal.getStrMealThumb())
-                .placeholder(R.drawable.avatar_placeholder)
-                .error(R.drawable.avatar_placeholder)
+                .placeholder(R.drawable.avatar_placeholders)
+                .error(R.drawable.avatar_placeholders)
                 .centerCrop()
                 .into(holder.ivMealImage);
 

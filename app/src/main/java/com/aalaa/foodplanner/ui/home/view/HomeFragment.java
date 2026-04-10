@@ -203,7 +203,7 @@ public class HomeFragment extends Fragment implements HomeView, FavView, OnHomeM
         if (meal != null) {
             Glide.with(this)
                     .load(meal.getStrMealThumb())
-                    .placeholder(R.drawable.avatar_placeholder)
+                    .placeholder(R.drawable.avatar_placeholders)
                     .into(mealOfDayImage);
             mealOfDayName.setText(meal.getStrMeal());
             mealOfDayCard.setOnClickListener(v -> onMealClick(meal));
