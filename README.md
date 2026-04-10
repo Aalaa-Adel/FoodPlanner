@@ -80,7 +80,7 @@ FoodPlanner (MealMate) is a full-featured Android application that allows users 
 
 | Meal Details | Favorites | Plans |
 |---|---|---|
-| ![](screenshots/meal_details.png) | ![](screenshots/favorites.png) | ![](screenshots/plans.png) |
+| ![](screenshots/details.png) | ![](screenshots/favorites.png) | ![](screenshots/plans.png) |
 
 | Profile |
 |---|
