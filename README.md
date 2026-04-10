@@ -9,7 +9,7 @@
 ![License](https://img.shields.io/badge/License-MIT-gold)
 
 <p align="center">
-  <img src="assets/icons/app_icon.png" width="120" />
+  <img src="screenshots/logo.png" width="120" />
 </p>
 
 **Meal Discovery & Planning App for Android**
