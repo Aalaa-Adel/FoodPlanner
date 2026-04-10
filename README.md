@@ -322,6 +322,13 @@ The application consumes a meal API to fetch:
 
 ---
 
+## 🚀 Release
+
+**Latest Release:** `v1.0.0`  
+Initial stable release of FoodPlanner (MealMate).
+
+---
+
 ## 📄 License
 
 This project is licensed under the **MIT License**.
