@@ -1,4 +1,4 @@
-# 🍽️ FoodPlanner (MealMate)
+# 🍽️ MealMate
 
 ![Platform](https://img.shields.io/badge/Platform-Android-green)
 ![Language](https://img.shields.io/badge/Language-Java-orange)
