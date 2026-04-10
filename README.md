@@ -1,3 +1,5 @@
+# 🍽️ FoodPlanner (MealMate)
+
 ![Platform](https://img.shields.io/badge/Platform-Android-green)
 ![Language](https://img.shields.io/badge/Language-Java-orange)
 ![Architecture](https://img.shields.io/badge/Architecture-MVP-purple)
@@ -5,8 +7,6 @@
 ![Database](https://img.shields.io/badge/Local-Room-blue)
 ![Backend](https://img.shields.io/badge/Backend-Firebase-yellow)
 ![License](https://img.shields.io/badge/License-MIT-gold)
-
-# 🍽️ FoodPlanner (MealMate)
 
 **Meal Discovery & Planning App for Android**
 
