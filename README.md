@@ -6,7 +6,8 @@
 ![Reactive](https://img.shields.io/badge/RxJava3-Enabled-red)
 ![Database](https://img.shields.io/badge/Local-Room-blue)
 ![Backend](https://img.shields.io/badge/Backend-Firebase-yellow)
-![License](https://img.shields.io/badge/License-MIT-gold)
+[![License](https://img.shields.io/badge/License-MIT-gold)](./LICENSE)
+[![Release](https://img.shields.io/badge/Release-v1.0.0-blue)](../../releases/tag/v1.0.0)
 
 <p align="center">
   <img src="screenshots/logo.png" width="120" />
